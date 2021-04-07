@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/prochild">
-  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="15" maxIdle="10" name="jdbc/prochild" password="Y4cAEiaUbz" type="javax.sql.DataSource" url="jdbc:mysql://remotemysql.com/4H5MF0ScDW" username="4H5MF0ScDW"/>
-</Context>
