@@ -8,7 +8,10 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <button id="myButton" onclick="goToUsersList()">Click me</button>
+        <button id="myButton" onclick="goToUsersList()">Click me for users</button>
+        <button id="myButton2" onclick="goToClienteList()">Click me for clientes</button>
+        <button id="myButton3" onclick="goToAssistenteSocialList()">Click me for assistentes</button>
+
     </body>
 </html>
 
@@ -19,4 +22,13 @@ $(button_my_button).click(function(){
  window.location.href='frontoffice/modules/user/UserList.html';
 });
 
+var button_my_button2 = "#myButton2";
+$(button_my_button2).click(function(){
+ window.location.href='frontoffice/modules/cliente/ClienteList.html';
+});
+
+var button_my_button3 = "#myButton3";
+$(button_my_button3).click(function(){
+ window.location.href='frontoffice/modules/assistentesocial/AssistenteSocialList.html';
+});
 </script>

@@ -74,4 +74,52 @@ public class UserRepository {
         return users;
     }
     
+    /*public User findUser(){
+        User user = new User();
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        
+        final String sql = "Select * from users where userid = 1";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+    
+            user.setUserId(rs.getInt("userId"));
+            user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+
+        } catch (Exception e) {
+            
+            System.out.println("Erro findAllUsers " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return user;
+    }*/
 }

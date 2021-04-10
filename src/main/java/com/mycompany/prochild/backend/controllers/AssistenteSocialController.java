@@ -5,8 +5,8 @@
  */
 package com.mycompany.prochild.backend.controllers;
 
-import com.mycompany.prochild.backend.models.User;
-import com.mycompany.prochild.backend.modules.user.UserServices;
+import com.mycompany.prochild.backend.models.AssistenteSocial;
+import com.mycompany.prochild.backend.modules.assistentesocial.AssistenteSocialServices;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,12 +22,12 @@ import org.json.JSONObject;
 
 /**
  *
- * @author ruibraga
+ * @author jcmol
  */
-@WebServlet(name = "UserController", urlPatterns = {"/UserController"})
-public class UserController extends HttpServlet{
+@WebServlet(name = "AssistenteSocialController", urlPatterns = {"/AssistenteSocialController"})
+public class AssistenteSocialController extends HttpServlet{
     
-    private UserServices userservice = new UserServices();
+    private AssistenteSocialServices assistenteservice = new AssistenteSocialServices();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
@@ -38,12 +38,10 @@ public class UserController extends HttpServlet{
         String aux_what = (String) request.getParameter("pwhat");  
         
         switch(aux_what){
-            case "findAllUsers":
-               findAllUsers(request, response);
+            case "findAllAssistentes":
+               findAllAssistentes(request, response);
                 break;
-            /*case "findUser":
-                findUser(request, response);
-                break;*/
+            
         }        
     }
     
@@ -86,7 +84,7 @@ public class UserController extends HttpServlet{
         return "Short description";
     }// </editor-fold>
     
-    private void findAllUsers(HttpServletRequest request, HttpServletResponse response) {
+    private void findAllAssistentes(HttpServletRequest request, HttpServletResponse response) {
 
         JSONObject object = new JSONObject();
         JSONArray array = new JSONArray();
@@ -95,43 +93,21 @@ public class UserController extends HttpServlet{
         try {
             object.put("result", "KO");
             
-            List<User> users = userservice.findAllUsers();
+            List<AssistenteSocial> assistentes = assistenteservice.findAllAssistentes();
             
-            for(User user: users) {
-                array.put(user.toJSON());
+            for(AssistenteSocial assistente: assistentes) {
+                array.put(assistente.toJSON());
             }
             
             object.put("result", "OK");
-            object.put("users", array);
+            object.put("assistente", array);
             
             pw = response.getWriter();
             pw.write(object.toString());
         } catch (IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AssistenteSocialController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             pw.close();
         }
     }
-    
-    /*private void findUser(HttpServletRequest request, HttpServletResponse response) {
-
-        JSONObject object = new JSONObject();
-        
-        PrintWriter pw = null;
-        try {
-            object.put("result", "KO");
-            
-            User user = userservice.findUser();         
-            
-            object.put("result", "OK");
-            object.put("user", user.toJSON());
-            
-            pw = response.getWriter();
-            pw.write(object.toString());
-        } catch (IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            pw.close();
-        }
-    }*/
 }

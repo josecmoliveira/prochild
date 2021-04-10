@@ -20,4 +20,7 @@ public class UserServices {
         return user.findAllUsers();
     }
     
+    /*public User findUser() {
+        return user.findUser();
+    }*/
 }
