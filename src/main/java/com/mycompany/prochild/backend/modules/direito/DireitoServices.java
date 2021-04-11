@@ -5,7 +5,7 @@
  */
 package com.mycompany.prochild.backend.modules.direito;
 
-import com.mycompany.prochild.backend.models.Direitos;
+import com.mycompany.prochild.backend.models.Direito;
 import java.util.List;
 
 /**
@@ -15,7 +15,7 @@ import java.util.List;
 public class DireitoServices {
     private DireitoRepository direito = new DireitoRepository();
     
-    public List<Direitos> findAllDireitos() {
+    public List<Direito> findAllDireitos() {
         return direito.findAllDireitos();
     }
 }

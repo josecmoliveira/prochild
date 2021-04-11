@@ -5,7 +5,7 @@
  */
 package com.mycompany.prochild.backend.controllers;
 
-import com.mycompany.prochild.backend.models.Direitos;
+import com.mycompany.prochild.backend.models.Direito;
 import com.mycompany.prochild.backend.modules.direito.DireitoServices;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,12 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-/**
- *
- * @author jcmol
- */
-@WebServlet(name = "DireitosController", urlPatterns = {"/DireitosController"})
-public class DireitosController extends HttpServlet{
+
+@WebServlet(name = "DireitoController", urlPatterns = {"/DireitoController"})
+public class DireitoController extends HttpServlet{
     
     private DireitoServices direitoservice = new DireitoServices();
     
@@ -93,19 +90,19 @@ public class DireitosController extends HttpServlet{
         try {
             object.put("result", "KO");
             
-            List<Direitos> direitos = direitoservice.findAllDireitos();
+            List<Direito> direitos = direitoservice.findAllDireitos();
             
-            for(Direitos direito: direitos) {
+            for(Direito direito: direitos) {
                 array.put(direito.toJSON());
             }
             
             object.put("result", "OK");
-            object.put("assistente", array);
+            object.put("direito", array);
             
             pw = response.getWriter();
             pw.write(object.toString());
         } catch (IOException ex) {
-            Logger.getLogger(DireitosController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             pw.close();
         }

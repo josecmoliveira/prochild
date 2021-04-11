@@ -5,7 +5,7 @@
  */
 package com.mycompany.prochild.backend.modules.direito;
 
-import com.mycompany.prochild.backend.models.Direitos;
+import com.mycompany.prochild.backend.models.Direito;
 import com.mycompany.prochild.sql_connection.DataBaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,8 +19,8 @@ import java.util.List;
  */
 public class DireitoRepository {
 
-    public List<Direitos> findAllDireitos() {
-        List<Direitos> direitos = new ArrayList();
+    public List<Direito> findAllDireitos() {
+        List<Direito> direitos = new ArrayList();
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -33,7 +33,7 @@ public class DireitoRepository {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Direitos direito = new Direitos();
+                Direito direito = new Direito();
                 
                 direito.setAssistenteId(rs.getInt("direito_assistenteId"));
                 direito.setDireitoId(rs.getInt("direitoId"));

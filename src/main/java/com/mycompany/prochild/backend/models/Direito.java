@@ -11,7 +11,7 @@ import org.json.JSONObject;
  *
  * @author jcmol
  */
-public class Direitos extends AssistenteSocial{
+public class Direito extends AssistenteSocial{
     private int direitoId;
 
     public int getDireitoId() {
