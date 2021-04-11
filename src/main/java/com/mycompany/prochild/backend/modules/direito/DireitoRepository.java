@@ -35,9 +35,9 @@ public class DireitoRepository {
             while (rs.next()) {
                 Direito direito = new Direito();
                 
-                direito.setAssistenteId(rs.getInt("direito_assistenteId"));
+                direito.setAssistenteId(rs.getInt("assistenteId"));
                 direito.setDireitoId(rs.getInt("direitoId"));
-                direito.setDireitoNome(rs.getString("nome"));
+                direito.setNome(rs.getString("nome"));
                 direito.setDescricao(rs.getString("descricao"));
                 direitos.add(direito);
             }

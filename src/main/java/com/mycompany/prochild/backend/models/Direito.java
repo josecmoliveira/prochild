@@ -13,6 +13,9 @@ import org.json.JSONObject;
  */
 public class Direito extends AssistenteSocial{
     private int direitoId;
+    private String nome;
+    private String descricao;
+    
 
     public int getDireitoId() {
         return direitoId;
@@ -22,11 +25,11 @@ public class Direito extends AssistenteSocial{
         this.direitoId = direitoId;
     }
 
-    public String getDireitoNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setDireitoNome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -38,16 +41,13 @@ public class Direito extends AssistenteSocial{
         this.descricao = descricao;
     }
 
-    private String nome;
-    private String descricao;
-    
     public JSONObject toJSON() {
         
         JSONObject object = new JSONObject();
         
-        object.put("direitos_assistenteId", getAssistenteId());
+        object.put("assistenteId", getAssistenteId());
         object.put("direitoId", getDireitoId());
-        object.put("nome", getDireitoNome());
+        object.put("nome", getNome());
         object.put("descricao", getDescricao());
         
         return object;
