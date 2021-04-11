@@ -73,4 +73,47 @@ public class DireitoRepository {
         
         return direitos;
     }
+    
+    public int insertDireito(Direito direito) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        
+        String sql = "INSERT INTO direitos (nome, descricao, direitos_assistenteId) VALUES (?,?,?);";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, direito.getNome());
+            pstmt.setString(2, direito.getDescricao());
+            pstmt.setInt(3, direito.getAssistenteId());
+            
+            result = pstmt.executeUpdate();
+            
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro insertDireito " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
 }

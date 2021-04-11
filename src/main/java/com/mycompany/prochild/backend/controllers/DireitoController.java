@@ -38,6 +38,9 @@ public class DireitoController extends HttpServlet{
             case "findAllDireitos":
                findAllDireitos(request, response);
                 break;
+            case "insertDireito":
+                insertDireito(request, response);
+                break;
             
         }        
     }
@@ -98,6 +101,40 @@ public class DireitoController extends HttpServlet{
             
             object.put("result", "OK");
             object.put("direito", array);
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+    
+    private void insertDireito(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String nome = request.getParameter("nome");
+        String descricao = request.getParameter("descricao");
+        String assistenteIdString = request.getParameter("assistente_id");
+        
+        try {
+            object.put("result", "KO");
+                    
+            if(!assistenteIdString.equals("")) {
+                Direito direito = new Direito();
+                direito.setNome(nome);
+                direito.setDescricao(descricao);
+                direito.setAssistenteId(Integer.parseInt(assistenteIdString));
+                
+                int result = direitoservice.insertDireito(direito);
+            
+                if(result == 1) {
+                    object.put("result", "OK");
+                }
+            }
             
             pw = response.getWriter();
             pw.write(object.toString());
