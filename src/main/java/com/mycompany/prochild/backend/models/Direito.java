@@ -41,7 +41,6 @@ public class Direito extends AssistenteSocial{
     private String nome;
     private String descricao;
     
-    @Override
     public JSONObject toJSON() {
         
         JSONObject object = new JSONObject();
