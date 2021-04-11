@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 function getDireitosList() {
     $.ajax({
-            url: 'http://localhost:8080/prochild/DireitosController',
+            url: 'http://localhost:8080/prochild/DireitoController',
             data: {'pwhat': 'findAllDireitos'},
             beforeSend: function (xhr) {                
                 console.log("teste_before");
