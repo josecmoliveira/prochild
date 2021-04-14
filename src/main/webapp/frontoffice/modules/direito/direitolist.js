@@ -19,8 +19,10 @@ function getDireitosList() {
                 console.log("teste_success");
                 var json = $.parseJSON(data);
                 console.log(json);
-                for (var i=0; i<data.length; i++) {
-                       var row = $('<tr><td>' + data[i].direitoId+ '</td><td>' + data[i].nome + '</td><td>' + data[i].assistenteId + '</td><td>' + data[i].descricao + '</td></tr>');
+                var count = Object.keys(json.direito).length;
+                console.log(count);
+                for (var i=0; i<count; i++) {
+                       var row = $('<tr><td>' + json.direito[i].direitoId+ '</td><td>' + json.direito[i].nome + '</td><td>' + json.direito[i].assistenteId + '</td><td>' + json.direito[i].descricao + '</td></tr>');
                        $('#tabelatopicos').append(row);
                        console.log(json.lenght);
         }
