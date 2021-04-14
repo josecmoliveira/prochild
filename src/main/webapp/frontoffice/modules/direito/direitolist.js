@@ -22,6 +22,7 @@ function getDireitosList() {
                 for (var i=0; i<data.length; i++) {
                        var row = $('<tr><td>' + data[i].direitoId+ '</td><td>' + data[i].nome + '</td><td>' + data[i].assistenteId + '</td><td>' + data[i].descricao + '</td></tr>');
                        $('#tabelatopicos').append(row);
+                       console.log(json.lenght);
         }
             }
         });
