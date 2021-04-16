@@ -23,4 +23,8 @@ public class UserServices {
     /*public User findUser() {
         return user.findUser();
     }*/
+    
+    public int insertUser(User new_user) {
+        return user.insertUser(new_user);
+    }
 }

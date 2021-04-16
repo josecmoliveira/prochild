@@ -19,6 +19,13 @@ function getClientesList() {
                 console.log("teste_success");
                 var json = $.parseJSON(data);
                 console.log(json);
+                var count = Object.keys(json.cliente).length;
+                console.log(count);
+                for (var i=0; i<count; i++) {
+                       var row = $('<tr><td>' + json.cliente[i].clienteId+ '</td><td>' + json.cliente[i].nome + '</td><td>' + json.cliente[i].email + '</td><td>' + json.cliente[i].genero + '</td><td>' + json.cliente[i].tipo + '</td></tr>');
+                       $('#tabelaclientes').append(row);
+                       console.log(json.lenght);
+                }   
             }
         });
 }

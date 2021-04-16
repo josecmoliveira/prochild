@@ -18,4 +18,8 @@ public class AssistenteSocialServices {
     public List<AssistenteSocial> findAllAssistentes() {
         return assistente.findAllAssistentes();
     }
+    
+    public int insertAssistente(AssistenteSocial assist) {
+        return assistente.insertAssistente(assist);
+    }
 }

@@ -122,4 +122,45 @@ public class UserRepository {
         
         return user;
     }*/
+    
+    public int insertUser(User user) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "INSERT INTO users (username, password) VALUES (?,?)";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getPassword());
+            
+            result = pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro insertUser " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
 }

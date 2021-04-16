@@ -44,6 +44,9 @@ public class UserController extends HttpServlet{
             /*case "findUser":
                 findUser(request, response);
                 break;*/
+            case "insertUser":
+                insertUser(request, response);
+                break;
         }        
     }
     
@@ -134,4 +137,34 @@ public class UserController extends HttpServlet{
             pw.close();
         }
     }*/
+    
+    private void insertUser(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+ 
+        try {
+            object.put("result", "KO");
+                    
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);              
+                
+            int result = userservice.insertUser(user);
+            
+            if(result == 1) {
+                object.put("result", "OK");
+            }
+                        
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
 }

@@ -110,4 +110,42 @@ public class ClienteController extends HttpServlet{
             pw.close();
         }
     }
+    
+    private void insertCliente(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String genero = request.getParameter("genero");
+        String tipo = request.getParameter("tipo");
+        String userIdString = request.getParameter("clientes_userId");
+        
+        try {
+            object.put("result", "KO");
+                    
+            if(!userIdString.equals("")) {
+                Cliente cliente = new Cliente();
+                cliente.setNome(nome);
+                cliente.setEmail(email);
+                cliente.setGenero(genero);
+                cliente.setTipo(tipo);
+                cliente.setUserId(Integer.parseInt(userIdString));
+                
+                int result = clienteservice.insertCliente(cliente);
+            
+                if(result == 1) {
+                    object.put("result", "OK");
+                }
+            }
+                        
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
 }

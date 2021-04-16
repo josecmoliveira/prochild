@@ -110,4 +110,40 @@ public class AssistenteSocialController extends HttpServlet{
             pw.close();
         }
     }
+    
+    private void insertAssistente(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String nifString = request.getParameter("nif");
+        String userIdString = request.getParameter("assistentesocial_userId");
+        
+        try {
+            object.put("result", "KO");
+                    
+            if(!userIdString.equals("")) {
+                AssistenteSocial assistente = new AssistenteSocial();
+                assistente.setNome(nome);
+                assistente.setEmail(email);
+                assistente.setNif(Integer.parseInt(nifString));
+                assistente.setUserId(Integer.parseInt(userIdString));
+                
+                int result = assistenteservice.insertAssistente(assistente);
+            
+                if(result == 1) {
+                    object.put("result", "OK");
+                }
+            }
+                        
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(AssistenteSocialController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
 }

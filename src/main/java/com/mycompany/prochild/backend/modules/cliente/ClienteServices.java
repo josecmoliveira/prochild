@@ -19,4 +19,8 @@ public class ClienteServices {
     public List<Cliente> findAllClientes() {
         return cliente.findAllClientes();
     }
+    
+    public int insertCliente(Cliente new_cliente) {
+        return cliente.insertCliente(new_cliente);
+    }
 }

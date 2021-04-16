@@ -75,4 +75,48 @@ public class ClienteRepository {
         
         return clientes;
     }
+    
+    public int insertCliente(Cliente cliente) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "INSERT INTO clientes (nome, email, genero, tipo, clientes_userId) VALUES (?,?,?,?,?)";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, cliente.getNome());
+            pstmt.setString(2, cliente.getEmail());
+            pstmt.setString(3, cliente.getGenero());
+            pstmt.setString(4, cliente.getTipo());
+            pstmt.setInt(5, cliente.getUserId());
+            
+            result = pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro insertCliente " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
 }

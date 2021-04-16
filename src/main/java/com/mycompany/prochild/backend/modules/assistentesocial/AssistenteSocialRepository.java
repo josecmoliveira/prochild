@@ -74,4 +74,47 @@ public class AssistenteSocialRepository {
         
         return assistentes;
     }
+    
+    public int insertAssistente(AssistenteSocial assistente) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "INSERT INTO assistentesocial (nome, email, nif, assistentesocial_userId) VALUES (?,?,?,?)";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, assistente.getNome());
+            pstmt.setString(2, assistente.getEmail());
+            pstmt.setInt(3, assistente.getNif());
+            pstmt.setInt(5, assistente.getUserId());
+            
+            result = pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro insertAssistente " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
 }
