@@ -89,7 +89,7 @@ public class AssistenteSocialRepository {
             pstmt.setString(1, assistente.getNome());
             pstmt.setString(2, assistente.getEmail());
             pstmt.setInt(3, assistente.getNif());
-            pstmt.setInt(5, assistente.getUserId());
+            pstmt.setInt(4, assistente.getUserId());
             
             result = pstmt.executeUpdate();
 

@@ -41,7 +41,9 @@ public class AssistenteSocialController extends HttpServlet{
             case "findAllAssistentes":
                findAllAssistentes(request, response);
                 break;
-            
+            case "insertAssistente":
+                insertAssistente(request, response);
+                break;
         }        
     }
     

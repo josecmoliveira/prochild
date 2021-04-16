@@ -41,6 +41,9 @@ public class ClienteController extends HttpServlet{
             case "findAllClientes":
                findAllClientes(request, response);
                 break;
+            case "insertCliente":
+                insertCliente(request, response);
+                break;
             
         }        
     }
