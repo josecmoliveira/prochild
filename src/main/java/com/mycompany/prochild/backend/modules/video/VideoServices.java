@@ -19,7 +19,15 @@ public class VideoServices {
         return video.findAllVideos();
     }
     
+    public Video findVideoById(int videoId) {
+        return video.findVideoById(videoId);
+    }
+    
     public int insertVideo(Video dir) {
         return video.insertVideo(dir);
+    }
+    
+    public int updateideo(Video dir) {
+        return video.updateVideo(dir);
     }
 }

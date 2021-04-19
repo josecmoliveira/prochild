@@ -22,4 +22,8 @@ public class NoticiaServices {
     public int insertNoticia(Noticia ntc){
         return noticia.insertNoticia(ntc);
     }
+    
+    public int updateNoticia(Noticia ntc){
+        return noticia.updateNoticia(ntc);
+    }
 }

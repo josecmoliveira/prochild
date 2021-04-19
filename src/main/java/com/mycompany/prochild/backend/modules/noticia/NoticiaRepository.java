@@ -87,8 +87,8 @@ public class NoticiaRepository {
             pstmt = conn.prepareStatement(sql);
             
             pstmt.setString(1, noticia.getNome());
-            pstmt.setString(3, noticia.getLink());
-            pstmt.setString(2, noticia.getDescricao());            
+            pstmt.setString(2, noticia.getLink());
+            pstmt.setString(3, noticia.getDescricao());            
             pstmt.setInt(4, noticia.getAssistenteId());
             
             result = pstmt.executeUpdate();
@@ -96,6 +96,50 @@ public class NoticiaRepository {
         } catch (Exception e) {
             result = -1;
             System.out.println("Erro insertNoticia " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
+    
+    public int updateNoticia(Noticia noticia) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "UPDATE noticias SET nome = ?, link = ?, descricao = ? "
+                   + " WHERE noticiaId = ?";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, noticia.getNome());
+            pstmt.setString(2, noticia.getLink());
+            pstmt.setString(3, noticia.getDescricao());
+            pstmt.setInt(4, noticia.getNoticiaId());
+            
+            result = pstmt.executeUpdate();
+            
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro updateNoticia " + e.getMessage());
             e.printStackTrace();
 
         } finally {
