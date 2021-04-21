@@ -47,6 +47,9 @@ public class AssistenteSocialController extends HttpServlet{
             case "updateAssistente":
                 updateAssistente(request, response);
                 break; 
+            case "findAssistenteById":
+                findAssistenteById(request, response);
+                break; 
         }        
     }
     
@@ -180,6 +183,32 @@ public class AssistenteSocialController extends HttpServlet{
                     }
                 }
             }
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(AssistenteSocialController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+    
+    private void findAssistenteById(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        JSONArray array = new JSONArray();
+        String assistenteId = request.getParameter("assistenteId");
+        
+        PrintWriter pw = null;
+        try {
+            object.put("result", "KO");
+            
+           AssistenteSocial assistente = assistenteservice.findAssistenteById(Integer.parseInt(assistenteId));
+            
+                array.put(assistente.toJSON());
+            
+            object.put("result", "OK");
+            object.put("assistente", array);
             
             pw = response.getWriter();
             pw.write(object.toString());
