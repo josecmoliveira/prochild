@@ -39,13 +39,13 @@ public class UserController extends HttpServlet{
         
         switch(aux_what){
             case "findAllUsers":
-               findAllUsers(request, response);
+                findAllUsers(request, response);
                 break;
-            /*case "findUser":
-                findUser(request, response);
-                break;*/
             case "insertUser":
                 insertUser(request, response);
+                break;
+            case "updateUser":
+                updateUser(request, response);
                 break;
         }        
     }
@@ -116,18 +116,32 @@ public class UserController extends HttpServlet{
         }
     }
     
-    /*private void findUser(HttpServletRequest request, HttpServletResponse response) {
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) {
 
         JSONObject object = new JSONObject();
-        
         PrintWriter pw = null;
+        
+        String userId = request.getParameter("userId");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
         try {
             object.put("result", "KO");
+                    
+            if(!userId.equals("")) {
+                User user = userservice.findUserById(Integer.parseInt(userId));
+                
+                if(user != null) {
+                    user.setUsername(username);
+                    user.setPassword(password);
+                    
+                    int result = userservice.updateUser(user);
             
-            User user = userservice.findUser();         
-            
-            object.put("result", "OK");
-            object.put("user", user.toJSON());
+                    if(result == 1) {
+                        object.put("result", "OK");
+                    }
+                }
+            }
             
             pw = response.getWriter();
             pw.write(object.toString());
@@ -136,7 +150,7 @@ public class UserController extends HttpServlet{
         } finally {
             pw.close();
         }
-    }*/
+    }
     
     private void insertUser(HttpServletRequest request, HttpServletResponse response) {
 

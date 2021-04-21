@@ -5,8 +5,8 @@
  */
 package com.mycompany.prochild.backend.controllers;
 
-import com.mycompany.prochild.backend.models.Direito;
-import com.mycompany.prochild.backend.modules.direito.DireitoServices;
+import com.mycompany.prochild.backend.models.Jogo;
+import com.mycompany.prochild.backend.modules.jogo.JogoServices;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,10 +21,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
-@WebServlet(name = "DireitoController", urlPatterns = {"/DireitoController"})
-public class DireitoController extends HttpServlet{
+@WebServlet(name = "JogoController", urlPatterns = {"/JogoController"})
+public class JogoController extends HttpServlet{
     
-    private DireitoServices direitoservice = new DireitoServices();
+    private JogoServices jogoservice = new JogoServices();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
@@ -35,15 +35,13 @@ public class DireitoController extends HttpServlet{
         String aux_what = (String) request.getParameter("pwhat");  
         
         switch(aux_what){
-            case "findAllDireitos":
-               findAllDireitos(request, response);
+            case "findAllJogos":
+               findAllJogos(request, response);
                 break;
-            case "insertDireito":
-                insertDireito(request, response);
+            case "insertJogoo":
+                insertJogo(request, response);
                 break;
-            case "updateDireito":
-                updateDescricao(request, response);
-                break;            
+            
         }        
     }
     
@@ -86,7 +84,7 @@ public class DireitoController extends HttpServlet{
         return "Short description";
     }// </editor-fold>
     
-    private void findAllDireitos(HttpServletRequest request, HttpServletResponse response) {
+    private void findAllJogos(HttpServletRequest request, HttpServletResponse response) {
 
         JSONObject object = new JSONObject();
         JSONArray array = new JSONArray();
@@ -95,43 +93,45 @@ public class DireitoController extends HttpServlet{
         try {
             object.put("result", "KO");
             
-            List<Direito> direitos = direitoservice.findAllDireitos();
+            List<Jogo> jogos = jogoservice.findAllJogos();
             
-            for(Direito direito: direitos) {
-                array.put(direito.toJSON());
+            for(Jogo jogo: jogos) {
+                array.put(jogo.toJSON());
             }
             
             object.put("result", "OK");
-            object.put("direito", array);
+            object.put("jogo", array);
             
             pw = response.getWriter();
             pw.write(object.toString());
         } catch (IOException ex) {
-            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JogoController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             pw.close();
         }
     }
     
-    private void insertDireito(HttpServletRequest request, HttpServletResponse response) {
+    private void insertJogo(HttpServletRequest request, HttpServletResponse response) {
 
         JSONObject object = new JSONObject();
         PrintWriter pw = null;
         
         String nome = request.getParameter("nome");
         String descricao = request.getParameter("descricao");
+        String disponivel = request.getParameter("disponivel");
         String assistenteIdString = request.getParameter("assistente_id");
         
         try {
             object.put("result", "KO");
                     
             if(!assistenteIdString.equals("")) {
-                Direito direito = new Direito();
-                direito.setNome(nome);
-                direito.setDescricao(descricao);
-                direito.setAssistenteId(Integer.parseInt(assistenteIdString));
+                Jogo jogo = new Jogo();
+                jogo.setNome(nome);
+                jogo.setDescricao(descricao);
+                jogo.setDisponivel(disponivel);
+                jogo.setAssistenteId(Integer.parseInt(assistenteIdString));
                 
-                int result = direitoservice.insertDireito(direito);
+                int result = jogoservice.insertJogo(jogo);
             
                 if(result == 1) {
                     object.put("result", "OK");
@@ -141,38 +141,7 @@ public class DireitoController extends HttpServlet{
             pw = response.getWriter();
             pw.write(object.toString());
         } catch (IOException ex) {
-            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            pw.close();
-        }
-    }
-    
-    private void updateDescricao(HttpServletRequest request, HttpServletResponse response) {
-
-        JSONObject object = new JSONObject();
-        PrintWriter pw = null;
-        
-        String direitoIdString = request.getParameter("direitoId");
-        String descricao = request.getParameter("descricao");
-        
-        try {
-            object.put("result", "KO");
-                    
-            if(!direitoIdString.equals("")) {
-                Direito direito = new Direito();
-                direito.setDescricao(descricao);
-                
-                int result = direitoservice.updateDescricao(direito);
-            
-                if(result == 1) {
-                    object.put("result", "OK");
-                }
-            }
-            
-            pw = response.getWriter();
-            pw.write(object.toString());
-        } catch (IOException ex) {
-            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JogoController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             pw.close();
         }

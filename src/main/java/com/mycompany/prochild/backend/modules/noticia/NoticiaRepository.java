@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.prochild.backend.modules.user;
+package com.mycompany.prochild.backend.modules.noticia;
 
-import com.mycompany.prochild.backend.models.User;
+import com.mycompany.prochild.backend.models.Noticia;
 import com.mycompany.prochild.sql_connection.DataBaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,17 +15,16 @@ import java.util.List;
 
 /**
  *
- * @author ruibraga
+ * @author jcmol
  */
-public class UserRepository {
-    
-    public List<User> findAllUsers() {
-        List<User> users = new ArrayList();
+public class NoticiaRepository {
+    public List<Noticia> findAllNoticias() {
+        List<Noticia> noticias = new ArrayList();
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         
-        final String sql = "Select * from users";
+        final String sql = "Select * from noticias";
         
         try {
             conn = DataBaseConnection.getConnection();
@@ -33,18 +32,19 @@ public class UserRepository {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                User user = new User();
+                Noticia noticia = new Noticia();
                 
-                user.setUserId(rs.getInt("userId"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-                
-                users.add(user);
+                noticia.setAssistenteId(rs.getInt("noticias_assistenteId"));
+                noticia.setNoticiaId(rs.getInt("noticiaId"));
+                noticia.setNome(rs.getString("nome"));
+                noticia.setLink(rs.getString("link"));
+                noticia.setDescricao(rs.getString("descricao"));
+                noticias.add(noticia);
             }
 
         } catch (Exception e) {
             
-            System.out.println("Erro findAllUsers " + e.getMessage());
+            System.out.println("Erro findAllNoticias " + e.getMessage());
             e.printStackTrace();
 
         } finally {
@@ -71,79 +71,31 @@ public class UserRepository {
 
         }
         
-        return users;
+        return noticias;
     }
     
-    public User findUserById(int userId){
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        User user = null;
-        
-        final String sql = "Select * from users where userid = ?";
-        
-        try {
-            conn = DataBaseConnection.getConnection();
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
-            
-            while (rs.next()) {
-                user = new User();
-                user.setUserId(rs.getInt("userId"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-            }
-        } catch (Exception e) {
-            
-            System.out.println("Erro findUserByid " + e.getMessage());
-            e.printStackTrace();
-
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (Exception e) {
-            }
-
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (Exception e) {
-            }
-
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-            }
-
-        }
-        
-        return user;
-    }
-    
-    public int insertUser(User user) {
+    public int insertNoticia(Noticia noticia) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         int result = 0;
         
-        String sql = "INSERT INTO users (username, password) VALUES (?,?)";
+        
+        String sql = "INSERT INTO noticias (nome, link, descricao, noticias_assistenteId) VALUES (?,?,?,?);";
         
         try {
             conn = DataBaseConnection.getConnection();
             pstmt = conn.prepareStatement(sql);
             
-            pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getPassword());
+            pstmt.setString(1, noticia.getNome());
+            pstmt.setString(2, noticia.getLink());
+            pstmt.setString(3, noticia.getDescricao());            
+            pstmt.setInt(4, noticia.getAssistenteId());
             
             result = pstmt.executeUpdate();
-
+            
         } catch (Exception e) {
             result = -1;
-            System.out.println("Erro insertUser " + e.getMessage());
+            System.out.println("Erro insertNoticia " + e.getMessage());
             e.printStackTrace();
 
         } finally {
@@ -166,27 +118,28 @@ public class UserRepository {
         return result;
     }
     
-    public int updateUser(User user) {
+    public int updateNoticia(Noticia noticia) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         int result = 0;
         
-        String sql = "UPDATE userSET username = ?, password = ?"
-                   + " WHERE userId = ?";
+        String sql = "UPDATE noticias SET nome = ?, link = ?, descricao = ? "
+                   + " WHERE noticiaId = ?";
         
         try {
             conn = DataBaseConnection.getConnection();
             pstmt = conn.prepareStatement(sql);
             
-            pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getPassword());
-            pstmt.setInt(3, user.getUserId());
+            pstmt.setString(1, noticia.getNome());
+            pstmt.setString(2, noticia.getLink());
+            pstmt.setString(3, noticia.getDescricao());
+            pstmt.setInt(4, noticia.getNoticiaId());
             
             result = pstmt.executeUpdate();
             
         } catch (Exception e) {
             result = -1;
-            System.out.println("Erro user " + e.getMessage());
+            System.out.println("Erro updateNoticia " + e.getMessage());
             e.printStackTrace();
 
         } finally {

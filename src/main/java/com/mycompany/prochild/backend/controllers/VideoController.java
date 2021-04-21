@@ -41,7 +41,9 @@ public class VideoController extends HttpServlet{
             case "insertVideo":
                 insertVideo(request, response);
                 break;
-            
+            case "updateVideo":
+                updateVideo(request, response);
+                break;
         }        
     }
     
@@ -137,6 +139,47 @@ public class VideoController extends HttpServlet{
             
                 if(result == 1) {
                     object.put("result", "OK");
+                }
+            }
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(VideoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+    
+    private void updateVideo(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String videoId = request.getParameter("video_id");
+        String nome = request.getParameter("nome");
+        String link = request.getParameter("link");
+        String descricao = request.getParameter("descricao");
+        String disponivel = request.getParameter("disponivel");
+        
+        
+        try {
+            object.put("result", "KO");
+                    
+            if(!videoId.equals("")) {
+                Video video = videoservice.findVideoById(Integer.parseInt(videoId));
+                
+                if(video != null) {
+                    video.setNome(nome);
+                    video.setLink(link);
+                    video.setDescricao(descricao);
+                    video.setDisponivel(disponivel);
+                    
+                    int result = videoservice.updateVideo(video);
+            
+                    if(result == 1) {
+                        object.put("result", "OK");
+                    }
                 }
             }
             
