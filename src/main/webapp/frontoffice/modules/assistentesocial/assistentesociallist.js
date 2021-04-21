@@ -6,6 +6,7 @@
 
 $(document).ready(function () {
     getAssistentesList();
+    getAssistente();
 });
 
 function getAssistentesList() {
@@ -23,3 +24,22 @@ function getAssistentesList() {
         });
 }
 
+function getAssistente() {
+    $.ajax({
+            url: 'http://localhost:8080/prochild/AssistenteSocialController',
+            data: {'pwhat': 'findAssistenteById', 'assistenteId': 1},
+            beforeSend: function (xhr) {                
+                console.log("teste_before");
+            },
+            success: function (data) {
+                console.log("teste_success");
+                var json = $.parseJSON(data);
+                console.log(json);
+                    $("#inputName").val(json.assistente[0].nome);
+                    $('#inputUsername').val(json.assistente[0].user_id);
+                    $('#inputEmailAddress').val(json.assistente[0].email);
+                    $('#inputNIF').val(json.assistente[0].nif);
+                    console.log(json.assistente[0].nome);
+            }
+        });
+}
