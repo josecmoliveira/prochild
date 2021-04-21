@@ -22,12 +22,4 @@ public class AssistenteSocialServices {
     public int insertAssistente(AssistenteSocial assist) {
         return assistente.insertAssistente(assist);
     }
-    
-    public AssistenteSocial findAssistenteById(int assistenteId) {
-        return assistente.findAssistenteById(assistenteId);
-    }
-    
-    public int updateAssistente(AssistenteSocial ass) {
-        return assistente.updateAssistente(ass);
-    }
 }

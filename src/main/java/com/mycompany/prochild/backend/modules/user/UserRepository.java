@@ -74,28 +74,26 @@ public class UserRepository {
         return users;
     }
     
-    public User findUserById(int userId){
+    /*public User findUser(){
+        User user = new User();
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        User user = null;
         
-        final String sql = "Select * from users where userid = ?";
+        final String sql = "Select * from users where userid = 1";
         
         try {
             conn = DataBaseConnection.getConnection();
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
-            
-            while (rs.next()) {
-                user = new User();
-                user.setUserId(rs.getInt("userId"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-            }
+    
+            user.setUserId(rs.getInt("userId"));
+            user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+
         } catch (Exception e) {
             
-            System.out.println("Erro findUserByid " + e.getMessage());
+            System.out.println("Erro findAllUsers " + e.getMessage());
             e.printStackTrace();
 
         } finally {
@@ -123,7 +121,7 @@ public class UserRepository {
         }
         
         return user;
-    }
+    }*/
     
     public int insertUser(User user) {
         Connection conn = null;
@@ -144,49 +142,6 @@ public class UserRepository {
         } catch (Exception e) {
             result = -1;
             System.out.println("Erro insertUser " + e.getMessage());
-            e.printStackTrace();
-
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (Exception e) {
-            }
-
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-            }
-
-        }
-        
-        return result;
-    }
-    
-    public int updateUser(User user) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        int result = 0;
-        
-        String sql = "UPDATE userSET username = ?, password = ?"
-                   + " WHERE userId = ?";
-        
-        try {
-            conn = DataBaseConnection.getConnection();
-            pstmt = conn.prepareStatement(sql);
-            
-            pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getPassword());
-            pstmt.setInt(3, user.getUserId());
-            
-            result = pstmt.executeUpdate();
-            
-        } catch (Exception e) {
-            result = -1;
-            System.out.println("Erro user " + e.getMessage());
             e.printStackTrace();
 
         } finally {

@@ -44,9 +44,7 @@ public class ClienteController extends HttpServlet{
             case "insertCliente":
                 insertCliente(request, response);
                 break;
-            case "updateCliente":
-                updateCliente(request, response);
-                break;            
+            
         }        
     }
     
@@ -145,42 +143,6 @@ public class ClienteController extends HttpServlet{
                 }
             }
                         
-            pw = response.getWriter();
-            pw.write(object.toString());
-        } catch (IOException ex) {
-            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            pw.close();
-        }
-    }
-    
-    private void updateCliente(HttpServletRequest request, HttpServletResponse response) {
-
-        JSONObject object = new JSONObject();
-        PrintWriter pw = null;
-        
-        String clienteId = request.getParameter("assistenteId");
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-                
-        try {
-            object.put("result", "KO");
-                    
-            if(!clienteId.equals("")) {
-                Cliente cliente = clienteservice.findClienteById(Integer.parseInt(clienteId));
-                
-                if(cliente != null) {
-                    cliente.setNome(nome);
-                    cliente.setEmail(email);
-                    
-                    int result = clienteservice.updateCliente(cliente);
-            
-                    if(result == 1) {
-                        object.put("result", "OK");
-                    }
-                }
-            }
-            
             pw = response.getWriter();
             pw.write(object.toString());
         } catch (IOException ex) {

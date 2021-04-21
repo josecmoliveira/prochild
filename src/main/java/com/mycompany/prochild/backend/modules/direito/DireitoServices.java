@@ -22,8 +22,4 @@ public class DireitoServices {
     public int insertDireito(Direito dir) {
         return direito.insertDireito(dir);
     }
-    
-    public int updateDescricao(Direito dir) {
-        return direito.updateDescricao(dir);
-    }
 }

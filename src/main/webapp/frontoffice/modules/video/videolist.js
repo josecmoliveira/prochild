@@ -19,13 +19,6 @@ function getVideosList() {
                 console.log("teste_success");
                 var json = $.parseJSON(data);
                 console.log(json);
-                var count = Object.keys(json.video).length;
-                console.log(count);
-                for (var i=0; i<count; i++) {
-                       var row = $('<div style="padding-bottom: 40px"><i class="fas fa-trash-alt"></i><h>'+ json.video[i].videoId +' ' +json.video[i].nome +'</h><a role="button" class="botaover">' + json.video[i].link + json.video[i].descricao +  '</a></div>');
-                       $('#grid').append(row);
-                       console.log(json.lenght);
-        }
             }
         });
 }

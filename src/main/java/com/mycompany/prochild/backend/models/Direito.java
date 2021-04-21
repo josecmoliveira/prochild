@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.mycompany.prochild.backend.models;
+
 import org.json.JSONObject;
 
 /**
@@ -50,5 +51,6 @@ public class Direito extends AssistenteSocial{
         object.put("descricao", getDescricao());
         
         return object;
+        
     }
 }

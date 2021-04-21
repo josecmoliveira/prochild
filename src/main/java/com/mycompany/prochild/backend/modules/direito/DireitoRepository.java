@@ -79,6 +79,7 @@ public class DireitoRepository {
         PreparedStatement pstmt = null;
         int result = 0;
         
+        
         String sql = "INSERT INTO direitos (nome, descricao, direitos_assistenteId) VALUES (?,?,?);";
         
         try {
@@ -94,46 +95,6 @@ public class DireitoRepository {
         } catch (Exception e) {
             result = -1;
             System.out.println("Erro insertDireito " + e.getMessage());
-            e.printStackTrace();
-
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (Exception e) {
-            }
-
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-            }
-
-        }
-        
-        return result;
-    }
-    
-    public int updateDescricao(Direito direito) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        int result = 0;
-        
-        int dirId = direito.getDireitoId();
-        String sql = "UPDATE direitos SET descricao = ? where direitoId = ?";
-        try {
-            conn = DataBaseConnection.getConnection();
-            pstmt = conn.prepareStatement(sql);
-
-            pstmt.setString(1, direito.getDescricao());
-            pstmt.setInt(2, dirId);
-            result = pstmt.executeUpdate();
-            
-        } catch (Exception e) {
-            result = -1;
-            System.out.println("Erro updateDescricao" + e.getMessage());
             e.printStackTrace();
 
         } finally {

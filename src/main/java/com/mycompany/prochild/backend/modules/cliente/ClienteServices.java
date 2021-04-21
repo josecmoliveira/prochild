@@ -23,12 +23,4 @@ public class ClienteServices {
     public int insertCliente(Cliente new_cliente) {
         return cliente.insertCliente(new_cliente);
     }
-    
-    public Cliente findClienteById(int clienteId) {
-        return cliente.findClienteById(clienteId);
-    }
-    
-    public int updateCliente(Cliente clt) {
-        return cliente.updateCliente(clt);
-    }
 }

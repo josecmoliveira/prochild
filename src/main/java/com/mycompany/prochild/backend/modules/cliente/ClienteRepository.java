@@ -76,64 +76,6 @@ public class ClienteRepository {
         return clientes;
     }
     
-    public Cliente findClienteById(int clienteId) {
-        List<Cliente> clientes = new ArrayList();
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        Cliente cliente = null;
-        
-        final String sql = "Select * from cliente where clienteId = ?";
-        
-        try {
-            conn = DataBaseConnection.getConnection();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, clienteId);
-            
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                cliente = new Cliente();
-                cliente.setClienteId(rs.getInt("clienteId"));
-                cliente.setUserId(rs.getInt("cliente_userId"));
-                cliente.setNome(rs.getString("nome"));
-                cliente.setEmail(rs.getString("email"));
-                cliente.setGenero(rs.getString("genero"));
-                cliente.setTipo(rs.getString("tipo"));
-            }
-
-        } catch (Exception e) {
-            
-            System.out.println("Erro findClienteById " + e.getMessage());
-            e.printStackTrace();
-
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (Exception e) {
-            }
-
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (Exception e) {
-            }
-
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-            }
-
-        }
-        
-        return cliente;
-    }
-    
     public int insertCliente(Cliente cliente) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -156,49 +98,6 @@ public class ClienteRepository {
         } catch (Exception e) {
             result = -1;
             System.out.println("Erro insertCliente " + e.getMessage());
-            e.printStackTrace();
-
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (Exception e) {
-            }
-
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-            }
-
-        }
-        
-        return result;
-    }
-    
-    public int updateCliente(Cliente cliente) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        int result = 0;
-        
-        String sql = "UPDATE cliente SET nome = ?, email = ?"
-                   + " WHERE clienteId = ?";
-        
-        try {
-            conn = DataBaseConnection.getConnection();
-            pstmt = conn.prepareStatement(sql);
-            
-            pstmt.setString(1, cliente.getNome());
-            pstmt.setString(2, cliente.getEmail());
-            pstmt.setInt(3, cliente.getClienteId());
-            
-            result = pstmt.executeUpdate();
-            
-        } catch (Exception e) {
-            result = -1;
-            System.out.println("Erro updateCliente " + e.getMessage());
             e.printStackTrace();
 
         } finally {
