@@ -5,8 +5,8 @@
  */
 package com.mycompany.prochild.backend.controllers;
 
-import com.mycompany.prochild.backend.models.Direito;
-import com.mycompany.prochild.backend.modules.direito.DireitoServices;
+import com.mycompany.prochild.backend.models.Noticia;
+import com.mycompany.prochild.backend.modules.noticia.NoticiaServices;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,11 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
-@WebServlet(name = "DireitoController", urlPatterns = {"/DireitoController"})
-public class DireitoController extends HttpServlet{
+/**
+ *
+ * @author jcmol
+ */
+@WebServlet(name = "NoticiaController", urlPatterns = {"/NoticiaController"})
+public class NoticiaController extends HttpServlet{
     
-    private DireitoServices direitoservice = new DireitoServices();
+    private NoticiaServices noticiaservice = new NoticiaServices();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
@@ -35,15 +38,13 @@ public class DireitoController extends HttpServlet{
         String aux_what = (String) request.getParameter("pwhat");  
         
         switch(aux_what){
-            case "findAllDireitos":
-               findAllDireitos(request, response);
+            case "findAllNoticias":
+               findAllNoticias(request, response);
                 break;
-            case "insertDireito":
-                insertDireito(request, response);
+            case "insertNoticia":
+                insertNoticia(request, response);
                 break;
-            case "updateDireito":
-                updateDescricao(request, response);
-                break;            
+            
         }        
     }
     
@@ -86,7 +87,7 @@ public class DireitoController extends HttpServlet{
         return "Short description";
     }// </editor-fold>
     
-    private void findAllDireitos(HttpServletRequest request, HttpServletResponse response) {
+    private void findAllNoticias(HttpServletRequest request, HttpServletResponse response) {
 
         JSONObject object = new JSONObject();
         JSONArray array = new JSONArray();
@@ -95,30 +96,31 @@ public class DireitoController extends HttpServlet{
         try {
             object.put("result", "KO");
             
-            List<Direito> direitos = direitoservice.findAllDireitos();
+            List<Noticia> noticias = noticiaservice.findAllNoticias();
             
-            for(Direito direito: direitos) {
-                array.put(direito.toJSON());
+            for(Noticia noticia: noticias) {
+                array.put(noticia.toJSON());
             }
             
             object.put("result", "OK");
-            object.put("direito", array);
+            object.put("noticia", array);
             
             pw = response.getWriter();
             pw.write(object.toString());
         } catch (IOException ex) {
-            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NoticiaController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             pw.close();
         }
     }
     
-    private void insertDireito(HttpServletRequest request, HttpServletResponse response) {
+    private void insertNoticia(HttpServletRequest request, HttpServletResponse response) {
 
         JSONObject object = new JSONObject();
         PrintWriter pw = null;
         
         String nome = request.getParameter("nome");
+        String link = request.getParameter("link");
         String descricao = request.getParameter("descricao");
         String assistenteIdString = request.getParameter("assistente_id");
         
@@ -126,12 +128,13 @@ public class DireitoController extends HttpServlet{
             object.put("result", "KO");
                     
             if(!assistenteIdString.equals("")) {
-                Direito direito = new Direito();
-                direito.setNome(nome);
-                direito.setDescricao(descricao);
-                direito.setAssistenteId(Integer.parseInt(assistenteIdString));
+                Noticia noticia = new Noticia();
+                noticia.setNome(nome);
+                noticia.setLink(link);
+                noticia.setDescricao(descricao);
+                noticia.setAssistenteId(Integer.parseInt(assistenteIdString));
                 
-                int result = direitoservice.insertDireito(direito);
+                int result = noticiaservice.insertNoticia(noticia);
             
                 if(result == 1) {
                     object.put("result", "OK");
@@ -141,38 +144,7 @@ public class DireitoController extends HttpServlet{
             pw = response.getWriter();
             pw.write(object.toString());
         } catch (IOException ex) {
-            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            pw.close();
-        }
-    }
-    
-    private void updateDescricao(HttpServletRequest request, HttpServletResponse response) {
-
-        JSONObject object = new JSONObject();
-        PrintWriter pw = null;
-        
-        String direitoIdString = request.getParameter("direitoId");
-        String descricao = request.getParameter("descricao");
-        
-        try {
-            object.put("result", "KO");
-                    
-            if(!direitoIdString.equals("")) {
-                Direito direito = new Direito();
-                direito.setDescricao(descricao);
-                
-                int result = direitoservice.updateDescricao(direito);
-            
-                if(result == 1) {
-                    object.put("result", "OK");
-                }
-            }
-            
-            pw = response.getWriter();
-            pw.write(object.toString());
-        } catch (IOException ex) {
-            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NoticiaController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             pw.close();
         }

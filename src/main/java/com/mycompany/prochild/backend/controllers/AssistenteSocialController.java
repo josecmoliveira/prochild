@@ -44,6 +44,9 @@ public class AssistenteSocialController extends HttpServlet{
             case "insertAssistente":
                 insertAssistente(request, response);
                 break;
+            case "updateAssistente":
+                updateAssistente(request, response);
+                break; 
         }        
     }
     
@@ -140,6 +143,44 @@ public class AssistenteSocialController extends HttpServlet{
                 }
             }
                         
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(AssistenteSocialController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+    
+    private void updateAssistente(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String assistenteId = request.getParameter("assistenteId");
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String nifString = request.getParameter("nif");        
+        
+        try {
+            object.put("result", "KO");
+                    
+            if(!assistenteId.equals("")) {
+                AssistenteSocial assistente = assistenteservice.findAssistenteById(Integer.parseInt(assistenteId));
+                
+                if(assistente != null) {
+                    assistente.setNome(nome);
+                    assistente.setEmail(email);
+                    assistente.setNif(Integer.parseInt(nifString));
+                    
+                    int result = assistenteservice.updateAssistente(assistente);
+            
+                    if(result == 1) {
+                        object.put("result", "OK");
+                    }
+                }
+            }
+            
             pw = response.getWriter();
             pw.write(object.toString());
         } catch (IOException ex) {

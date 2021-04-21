@@ -20,11 +20,15 @@ public class UserServices {
         return user.findAllUsers();
     }
     
-    /*public User findUser() {
-        return user.findUser();
-    }*/
-    
     public int insertUser(User new_user) {
         return user.insertUser(new_user);
+    }
+    
+    public User findUserById(int userId) {
+        return user.findUserById(userId);
+    }
+    
+    public int updateUser(User usr) {
+        return user.updateUser(usr);
     }
 }

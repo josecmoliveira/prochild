@@ -4,24 +4,26 @@
  * and open the template in the editor.
  */
 package com.mycompany.prochild.backend.models;
+
 import org.json.JSONObject;
 
 /**
  *
- * @author jcmol
+ * @author Raquel
  */
-public class Direito extends AssistenteSocial{
-    private int direitoId;
+public class Jogo extends AssistenteSocial{
+    private int jogoId;
     private String nome;
     private String descricao;
+    private String disponivel;
     
 
-    public int getDireitoId() {
-        return direitoId;
+    public int getJogoId() {
+        return jogoId;
     }
 
-    public void setDireitoId(int direitoId) {
-        this.direitoId = direitoId;
+    public void setJogoId(int jogoId) {
+        this.jogoId = jogoId;
     }
 
     public String getNome() {
@@ -31,7 +33,7 @@ public class Direito extends AssistenteSocial{
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    
     public String getDescricao() {
         return descricao;
     }
@@ -39,16 +41,26 @@ public class Direito extends AssistenteSocial{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    
+    public String getDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(String disponivel) {
+        this.disponivel = disponivel;
+    }
 
     public JSONObject toJSON() {
         
         JSONObject object = new JSONObject();
         
         object.put("assistenteId", getAssistenteId());
-        object.put("direitoId", getDireitoId());
+        object.put("videoId", getJogoId());
         object.put("nome", getNome());
         object.put("descricao", getDescricao());
+        object.put("disponivel", getDisponivel());
         
         return object;
+        
     }
 }
