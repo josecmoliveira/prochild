@@ -75,6 +75,62 @@ public class AssistenteSocialRepository {
         return assistentes;
     }
     
+    public AssistenteSocial findAssistenteById(int assistenteId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        AssistenteSocial assistente = null;
+        
+        final String sql = "Select * from assistentesocial where assistenteId = ?";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, assistenteId);
+            
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                assistente = new AssistenteSocial();
+                assistente.setAssistenteId(rs.getInt("assistenteId"));
+                assistente.setUserId(rs.getInt("assistentesocial_userId"));
+                assistente.setNome(rs.getString("nome"));
+                assistente.setEmail(rs.getString("email"));
+                assistente.setNif(rs.getInt("nif"));
+            }
+
+        } catch (Exception e) {
+            
+            System.out.println("Erro findAssistenteById " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return assistente;
+    }
+    
     public int insertAssistente(AssistenteSocial assistente) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -96,6 +152,50 @@ public class AssistenteSocialRepository {
         } catch (Exception e) {
             result = -1;
             System.out.println("Erro insertAssistente " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
+    
+    public int updateAssistente(AssistenteSocial assistente) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "UPDATE assistentesocial SET nome = ?, email = ?, nif = ? "
+                   + " WHERE assistenteId = ?";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, assistente.getNome());
+            pstmt.setString(2, assistente.getEmail());
+            pstmt.setInt(3, assistente.getNif());
+            pstmt.setInt(4, assistente.getAssistenteId());
+            
+            result = pstmt.executeUpdate();
+            
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro updateAssistente " + e.getMessage());
             e.printStackTrace();
 
         } finally {

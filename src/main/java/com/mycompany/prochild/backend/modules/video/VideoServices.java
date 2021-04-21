@@ -27,7 +27,7 @@ public class VideoServices {
         return video.insertVideo(dir);
     }
     
-    public int updateideo(Video dir) {
+    public int updateVideo(Video dir) {
         return video.updateVideo(dir);
     }
 }

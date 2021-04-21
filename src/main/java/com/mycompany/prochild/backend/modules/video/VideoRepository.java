@@ -76,13 +76,12 @@ public class VideoRepository {
     }
     
     public Video findVideoById(int videoId) {
-        List<Video> videos = new ArrayList();
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Video video = null;
         
-        final String sql = "Select * from videos where video_id = ?";
+        final String sql = "Select * from videos where videoId = ?";
         
         try {
             conn = DataBaseConnection.getConnection();

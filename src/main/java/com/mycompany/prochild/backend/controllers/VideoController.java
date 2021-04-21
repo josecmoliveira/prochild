@@ -44,7 +44,6 @@ public class VideoController extends HttpServlet{
             case "updateVideo":
                 updateVideo(request, response);
                 break;
-            
         }        
     }
     
@@ -176,7 +175,7 @@ public class VideoController extends HttpServlet{
                     video.setDescricao(descricao);
                     video.setDisponivel(disponivel);
                     
-                    int result = videoservice.updateideo(video);
+                    int result = videoservice.updateVideo(video);
             
                     if(result == 1) {
                         object.put("result", "OK");
