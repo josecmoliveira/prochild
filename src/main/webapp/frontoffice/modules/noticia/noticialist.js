@@ -5,13 +5,13 @@
  */
 
 $(document).ready(function () {
-    getAssistentesList();
+    getClientesList();
 });
 
-function getAssistentesList() {
+function getNoticiasList() {
     $.ajax({
-            url: 'http://localhost:8080/prochild/AssistenteSocialController',
-            data: {'pwhat': 'findAllAssistentes'},
+            url: 'http://localhost:8080/prochild/NoticiaController',
+            data: {'pwhat': 'findAllNoticias'},
             beforeSend: function (xhr) {                
                 console.log("teste_before");
             },
@@ -19,13 +19,13 @@ function getAssistentesList() {
                 console.log("teste_success");
                 var json = $.parseJSON(data);
                 console.log(json);
-                var count = Object.keys(json.assistente).length;
+                var count = Object.keys(json.noticia).length;
                 console.log(count);
                 for (var i=0; i<count; i++) {
-                       var row = $('<tr><td>' + json.assistente[i].user_id+ '</td><td>' + json.assistente[i].nome + '</td><td>' + json.assistente[i].email + '</td><td>' + json.assistente[i].nif + '</td></tr>');
-                       $('#tabelaassistente').append(row);
+                       var row = $('<tr><td>' + json.noticia[i].clienteId+ '</td><td>' + json.cliente[i].nome + '</td><td>' + json.cliente[i].email + '</td><td>' + json.cliente[i].genero + '</td><td>' + json.cliente[i].tipo + '</td></tr>');
+                       $('#tabelaclientes').append(row);
                        console.log(json.lenght);
-        }
+                }   
             }
         });
 }

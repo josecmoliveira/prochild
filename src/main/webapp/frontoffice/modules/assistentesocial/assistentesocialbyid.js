@@ -5,13 +5,13 @@
  */
 
 $(document).ready(function () {
-    getAssistentesList();
+    getAssistente();
 });
 
-function getAssistentesList() {
+function getAssistente() {
     $.ajax({
             url: 'http://localhost:8080/prochild/AssistenteSocialController',
-            data: {'pwhat': 'findAllAssistentes'},
+            data: {'pwhat': 'findAssistenteById', 'assistenteId': 1},
             beforeSend: function (xhr) {                
                 console.log("teste_before");
             },
@@ -19,13 +19,11 @@ function getAssistentesList() {
                 console.log("teste_success");
                 var json = $.parseJSON(data);
                 console.log(json);
-                var count = Object.keys(json.assistente).length;
-                console.log(count);
-                for (var i=0; i<count; i++) {
-                       var row = $('<tr><td>' + json.assistente[i].user_id+ '</td><td>' + json.assistente[i].nome + '</td><td>' + json.assistente[i].email + '</td><td>' + json.assistente[i].nif + '</td></tr>');
-                       $('#tabelaassistente').append(row);
-                       console.log(json.lenght);
-        }
+                    $("#inputName").val(json.assistente[0].nome);
+                    $('#inputUsername').val(json.assistente[0].user_id);
+                    $('#inputEmailAddress').val(json.assistente[0].email);
+                    $('#inputNIF').val(json.assistente[0].nif);
+                    console.log(json.assistente[0].nome);
             }
         });
 }
