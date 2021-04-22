@@ -10410,6 +10410,42 @@ text-transform: uppercase;
   text-transform: uppercase;
 }
 
+.utilizadores {
+  position:fixed;
+  left:18%;
+  top:53%;
+  color:#FFFFFF;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.utilizadores1{
+  position:fixed;
+  left:18%;
+  top:53%;
+  color:#FF3D00;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.perfil {
+  position:fixed;
+  left:18%;
+  top:58%;
+  color:#FFFFFF;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.perfil1{
+  position:fixed;
+  left:18%;
+  top:58%;
+  color:#FF3D00;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
 .terminarsessão {
   position:fixed;
   left:18%;
@@ -10523,7 +10559,7 @@ text-transform: uppercase;
 }
 
 .botaoguardar {
-  background-color: #FFD700;
+  background-color: #FF3D00;
   border: none;
   color: white;
   text-transform: uppercase;
