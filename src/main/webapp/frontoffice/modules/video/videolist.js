@@ -19,6 +19,13 @@ function getVideosList() {
                 console.log("teste_success");
                 var json = $.parseJSON(data);
                 console.log(json);
+                var count = Object.keys(json.video).length;
+                console.log(count);
+                for (var i=0; i<count; i++) {
+                       var row = $('<iframe width="400" height="280" src="'+ json.video[i].link +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+                       $('#grid').append(row);
+                       console.log(json.lenght);
+                }   
             }
         });
 }
