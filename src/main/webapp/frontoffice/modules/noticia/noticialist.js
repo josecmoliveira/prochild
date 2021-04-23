@@ -1,11 +1,5 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 $(document).ready(function () {
-    getClientesList();
+    getNoticiasList();
 });
 
 function getNoticiasList() {
@@ -22,10 +16,10 @@ function getNoticiasList() {
                 var count = Object.keys(json.noticia).length;
                 console.log(count);
                 for (var i=0; i<count; i++) {
-                       var row = $('<tr><td>' + json.noticia[i].clienteId+ '</td><td>' + json.cliente[i].nome + '</td><td>' + json.cliente[i].email + '</td><td>' + json.cliente[i].genero + '</td><td>' + json.cliente[i].tipo + '</td></tr>');
-                       $('#tabelaclientes').append(row);
+                       var row = $('<tr><td>' + json.noticia[i].noticiaId+ '</td><td>' + json.noticia[i].nome + '</td><td>' + json.noticia[i].link + '</td><td>' + json.noticia[i].descricao + '</td></tr>');
+                       $('#tabelanoticias').append(row);
                        console.log(json.lenght);
-                }   
+    }   
             }
         });
-}
+};

@@ -13,6 +13,7 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
         <link rel="icon" href="assets/img/icone.png"/>
         <script src="../../modules/direito/direitolist.js"></script>
+        <script src="../../modules/direito/submitTema.js"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -57,7 +58,7 @@
                             <tbody>
                             </tbody>
                         </table>
-                        <div class="popup" onclick="FunctionPopup()">
+                        <div class="popup">
                             <button class="botaoadicionar" onclick="openForm()">ADICIONAR</button>
                         </div>
     
@@ -70,13 +71,13 @@
                           <div class="link">
                             <text> NOME </text> 
                           </div>
-                          <input type="text"> 
+                          <input type="text" id="nome"> 
                             <div class="link">
                               <text> DESCRIÇÃO </text> 
                             </div>
-                            <input type="text"> 
+                            <input type="text" id="descricao"> 
                             </div>
-                              <button type="submit" class="botaoadicionar1">ADICIONAR</button>
+                              <button type="button" class="botaoadicionar1" onclick="javascript: submitTema();">ADICIONAR</button>
                             </form>
                           </div>
                         <div>
@@ -103,5 +104,5 @@
         function closeForm() {
           document.getElementById("myForm").style.display = "none";
         }
-        </script>
+    </script>
 </html>

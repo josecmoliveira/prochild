@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -10,7 +10,10 @@
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
         <link rel="icon" href="assets/img/icone.png"/>
+        <script src="../../modules/noticia/noticialist.js"></script>
+        <script src="../../modules/noticia/submitNoticia.js"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -43,12 +46,12 @@
                     <div class="container-fluid">
                         <text class="titulo1">Notícias</text>
                         
-                        <table class="tabela table-bordered" id="tabelatopicos" width="100%" cellspacing="0">
+                        <table class="tabela table-bordered" id="tabelanoticias" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th class="titulotabela" scope="col">ID ARTIGO</th>
                                     <th class="titulotabela">NOME</th><!-- comment -->
-                                    <th class="titulotabela">ASSISTENTE</th><!-- comment -->
+                                    <th class="titulotabela">LINK</th><!-- comment -->
                                     <th class="titulotabela">DESCRIÇÃO</th>
                                 </tr>
                             </thead>
@@ -57,7 +60,7 @@
                         </table>
                         
                     </div>
-                    <div class="popup" onclick="FunctionPopup()">
+                    <div class="popup">
                         <button class="botaoadicionar" onclick="openForm()">ADICIONAR</button>
                     </div>
 
@@ -70,13 +73,17 @@
                             <div class="link">
                               <text> NOME </text> 
                             </div>
-                            <input type="text"> 
+                            <input type="text" id="nome"> 
                               <div class="link">
-                                <text> DESCRIÇÃO </text> 
+                                <text> LINK </text> 
                               </div>
-                              <input type="text"> 
+                              <input type="text" id="link">
+                               <div class="link">
+                              <text> DESCRIÇÃO </text> 
+                            </div>
+                            <input type="text" id="descricao"> 
                               </div>
-                          <button type="submit" class="botaoadicionar1">ADICIONAR</button>
+                          <button type="submit" class="botaoadicionar1" onclick="submitNoticia()">ADICIONAR</button>
                     
                         </form>
                       </div>
@@ -84,7 +91,8 @@
                 
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
