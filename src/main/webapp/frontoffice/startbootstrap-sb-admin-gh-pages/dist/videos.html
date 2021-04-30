@@ -12,6 +12,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
         <script src="../../modules/video/videolist.js"></script>
+        <script src="../../modules/video/submitVideo.js"></script>
         <link rel="icon" href="assets/img/icone.png"/>
     </head>
     <body class="sb-nav-fixed">
@@ -63,13 +64,17 @@
                             <div class="link">
                               <text> NOME </text> 
                             </div>
-                            <input type="text"> 
+                              <input type="text" id="nome"> 
                               <div class="link">
                                 <text> DESCRIÇÃO </text> 
                               </div>
-                              <input type="text"> 
+                            <input type="text" id="descricao">
+                              <div class="link">
+                                <text> LINK </text> 
                               </div>
-                          <button type="submit" class="botaoadicionar1">ADICIONAR</button>
+                              <input type="text" id="link">
+                              </div>
+                          <button type="submit" class="botaoadicionar1" onclick="javascript: submitVideo(); closeForm();">ADICIONAR</button>
                         </form>
                       </div>
                 </main>

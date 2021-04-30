@@ -137,7 +137,7 @@ public class VideoRepository {
         int result = 0;
         
         
-        String sql = "INSERT INTO videos (nome, descricao, link, videos_assistenteId) VALUES (?,?,?);";
+        String sql = "INSERT INTO videos (nome, descricao, link, disponivel, videos_assistenteId) VALUES (?,?,?,?,?);";
         
         try {
             conn = DataBaseConnection.getConnection();
@@ -146,7 +146,8 @@ public class VideoRepository {
             pstmt.setString(1, video.getNome());
             pstmt.setString(2, video.getDescricao());
             pstmt.setString(3, video.getLink());
-            pstmt.setInt(4, video.getAssistenteId());
+            pstmt.setString(4, video.getDisponivel());
+            pstmt.setInt(5, video.getAssistenteId());
             
             result = pstmt.executeUpdate();
             
