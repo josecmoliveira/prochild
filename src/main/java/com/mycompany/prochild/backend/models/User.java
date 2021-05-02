@@ -16,6 +16,7 @@ public class User {
     private int userId;
     private String username;
     private String password;
+    private String nome;
 
     public int getUserId() {
         return userId;
@@ -40,6 +41,16 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    
     
     public JSONObject toJSON() {
         
@@ -48,6 +59,7 @@ public class User {
         object.put("user_id", getUserId());
         object.put("username", getUsername());
         object.put("password", getPassword());
+        object.put("nome", getNome());
         
         return object;
         

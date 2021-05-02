@@ -38,6 +38,7 @@ public class UserRepository {
                 user.setUserId(rs.getInt("userId"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
+                user.setNome(rs.getString("nome"));
                 
                 users.add(user);
             }
@@ -85,6 +86,9 @@ public class UserRepository {
         try {
             conn = DataBaseConnection.getConnection();
             pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, userId);
+            
             rs = pstmt.executeQuery();
             
             while (rs.next()) {
@@ -92,6 +96,7 @@ public class UserRepository {
                 user.setUserId(rs.getInt("userId"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
+                user.setNome(rs.getString("nome"));
             }
         } catch (Exception e) {
             
@@ -138,6 +143,7 @@ public class UserRepository {
             
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
+//            pstmt.setString(3, user.getNome());
             
             result = pstmt.executeUpdate();
 
