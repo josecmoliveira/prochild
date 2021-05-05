@@ -1,0 +1,90 @@
+div {
+    width: 100%;
+    height: 5vh;
+}
+
+.barra {
+    background-color: #FFC700;
+    width: 100%;
+    height: 70vh;
+    color: white;
+    text-align: center;
+}
+
+.conteudo {
+    background: white;
+    width: 100%;
+    height: 30vh;
+}
+
+body {
+    position: fixed;
+    margin: 50px;
+    text-align: center;
+}
+
+.textoterminarsessao1 {
+    color:#FFC700;
+    position: relative;
+    font-size: 23px;
+    font-weight: bold;
+    left:35px;
+    top:45px;
+}
+
+.textoterminarsessao2 {
+    color: #FFC700;
+    font-size: 23px;
+    font-weight: bold;
+    position: relative;
+    top:50px;
+    left:90px;
+}
+
+.botaosim{
+    background-color: #FFD700;
+      border: none;
+      color: white;
+      text-transform: uppercase;
+      padding: 6px 25px;
+      text-align: center;
+      text-decoration: none !important;
+      display: inline-block;
+      font-size: 20px;
+      border-radius: 30px;
+      width: 150px;
+      margin-right: auto;
+      transition-duration: 0.4s;
+      font-weight: bold;
+      position:relative;
+      left:-42%;
+      top:130px;
+  }
+  
+  .botaonão{
+    background-color: #FFD700;
+      border: none;
+      color: white;
+      text-transform: uppercase;
+      padding: 6px 25px;
+      text-align: center;
+      text-decoration: none !important;
+      display: inline-block;
+      font-size: 20px;
+      border-radius: 30px;
+      width: 150px;
+      margin-right: auto;
+      transition-duration: 0.4s;
+      font-weight: bold;
+      position:relative;
+      left:54%;
+      top:90px;
+  }
+
+  .iconesair {
+      position: relative;
+      top:130px;
+      left:80px;
+      width: 325px;
+      height: 450px;
+  }
