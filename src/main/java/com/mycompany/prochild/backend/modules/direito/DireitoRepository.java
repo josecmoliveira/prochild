@@ -116,6 +116,61 @@ public class DireitoRepository {
         return result;
     }
     
+    public Direito findDireitoById(int direitoId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Direito direito = null;
+        
+        final String sql = "Select * from direitos where direitoId = ?";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, direitoId);
+            
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                direito = new Direito();
+                direito.setDireitoId(rs.getInt("direitoId"));
+                direito.setAssistenteId(rs.getInt("direitos_assistenteId"));
+                direito.setNome(rs.getString("nome"));
+                direito.setDescricao(rs.getString("descricao"));
+            }
+
+        } catch (Exception e) {
+            
+            System.out.println("Erro findDireitoById " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return direito;
+    }
+    
     public int updateDescricao(Direito direito) {
         Connection conn = null;
         PreparedStatement pstmt = null;

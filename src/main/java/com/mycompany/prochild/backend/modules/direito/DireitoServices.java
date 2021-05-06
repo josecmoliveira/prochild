@@ -18,6 +18,9 @@ public class DireitoServices {
     public List<Direito> findAllDireitos() {
         return direito.findAllDireitos();
     }
+    public Direito findDireitoById(int direitoId) {
+        return direito.findDireitoById(direitoId);
+    }
     
     public int insertDireito(Direito dir) {
         return direito.insertDireito(dir);

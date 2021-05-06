@@ -177,4 +177,31 @@ public class DireitoController extends HttpServlet{
             pw.close();
         }
     }
+    
+    
+    private void findDireitoById(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        JSONArray array = new JSONArray();
+        String direitoId = request.getParameter("direitoId");
+        
+        PrintWriter pw = null;
+        try {
+            object.put("result", "KO");
+            
+           Direito direito = direitoservice.findDireitoById(Integer.parseInt(direitoId));
+            
+                array.put(direito.toJSON());
+            
+            object.put("result", "OK");
+            object.put("assistente", array);
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
 }
