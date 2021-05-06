@@ -22,8 +22,10 @@ function getVideosList() {
                 var count = Object.keys(json.video).length;
                 console.log(count);
                 for (var i=0; i<count; i++) {
-                       var row = $('<iframe width="400" height="280" src="'+ json.video[i].link +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
-                       $('#grid').append(row);
+                       var row = $('<tr><td><iframe width="400" height="280" margin="20px" src="'+ json.video[i].link 
+                               +'" title="YouTube video player" frameborder="0" allow="accelerometer; \n\
+                                autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td></tr>');
+                       $('#conteudo').append(row);
                        console.log(json.lenght);
                 }   
             }
