@@ -16,7 +16,7 @@ function getDireitosList() {
                 var count = Object.keys(json.direito).length;
                 console.log(count);
                 for (var i=0; i<count; i++) {
-                       var row = $('<tr><td>' + json.direito[i].nome + '</td></tr>');
+                       var row = $('<tr><td><a href="Tópicos2.html">' + json.direito[i].nome + '</a></td></tr>');
                        $('#tabelatemas').append(row);
                        console.log(json.lenght);
         }
