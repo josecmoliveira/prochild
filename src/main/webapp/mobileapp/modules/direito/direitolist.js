@@ -16,29 +16,38 @@ function getDireitosList() {
                 var count = Object.keys(json.direito).length;
                 console.log(count);
                 for (var i=0; i<count; i++) {
-                       var row = $('<tr id="12"><td style="display:none;">' + json.direito[i].direitoId + '</td><td>' + '<a id="link1" href="Tópicos2.html">' + json.direito[i].nome + '</a></td></tr>');
-                       $("#link1").click(function(){
-                           var row1 = document.getElementById("tabelatemas").rows[i].cells.item(0).innerHTML;
-                           console.log(row1);
-                       })
-                       $('#tabelatemas').append(row);
-                       console.log(json.lenght);
+                    var num = document.createElement("p");
+                    var num1 =(num.innerHTML = json.direito[i].direitoId);
+                    //console.log(num);
+                    var button = document.createElement("button");
+                    var button1 = (button.innerHTML = '<a id="link1" href="Tópicos2.html">' + json.direito[i].nome + '</a>');
+                    //console.log(button);
+                    var fin = '<tr><td style="display:none;">' + num1 + '</td><td>' + button1 + '</td></tr>';
+                    //console.log(fin);
+                       $('#tabelatemas').append(fin);
+                       $('a').click ( function() {
+                            var row = $(this).closest('tr');
+                            row1 = row.find('td:eq(0)').text();
+                            id = row1;
+                            setId(id);
+                            console.log(id);
+                        })
+
         }
             }
         });
 };
 
-function setId() {
-   var row1 = document.getElementById("tabelatemas").rows[i].cells.item(0).innerHTML;
-   
-   console.log(row1);
+function setId(val) {
+    id = val;
+                       
 }
 
 
 function getDireito() {
     $.ajax({
             url: 'http://localhost:8080/prochild/DireitoController',
-            data: {'pwhat': 'findDireitoById', 'direitoId': 3},
+            data: {'pwhat': 'findDireitoById', 'direitoId': id},
             beforeSend: function (xhr) {                
                 console.log("teste_before");
             },
