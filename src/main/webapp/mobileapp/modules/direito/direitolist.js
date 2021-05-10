@@ -20,7 +20,7 @@ function getDireitosList() {
                     var num1 =(num.innerHTML = json.direito[i].direitoId);
                     //console.log(num);
                     var button = document.createElement("button");
-                    var button1 = (button.innerHTML = '<a id="link1" href="Tópicos2.html">' + json.direito[i].nome + '</a>');
+                    var button1 = (button.innerHTML = '<a id="link1" target="_self" href="Tópicos2.html">' + json.direito[i].nome + '</a>');
                     //console.log(button);
                     var fin = '<tr><td style="display:none;">' + num1 + '</td><td>' + button1 + '</td></tr>';
                     //console.log(fin);
@@ -40,14 +40,16 @@ function getDireitosList() {
 
 function setId(val) {
     id = val;
-                       
+    localStorage.setItem("id", id);
+                  console.log()     
 }
 
 
 function getDireito() {
+    var newid = localStorage.getItem("id");
     $.ajax({
             url: 'http://localhost:8080/prochild/DireitoController',
-            data: {'pwhat': 'findDireitoById', 'direitoId': id},
+            data: {'pwhat': 'findDireitoById', 'direitoId': newid},
             beforeSend: function (xhr) {                
                 console.log("teste_before");
             },
@@ -56,8 +58,10 @@ function getDireito() {
                 console.log(data);
                 var json = $.parseJSON(data);
                 console.log(json);
-                    $("#nome").val(json.direito[0].nome);
-                    $("#descricao").val(json.direito[0].descricao);
+                    //$("#nome").val(
+                    document.getElementById("nome").textContent += json.direito[0].nome;
+                    document.getElementById("descricao").textContent += json.direito[0].nome;
+                    
                     console.log(json.direito[0].nome);
             }
         });
