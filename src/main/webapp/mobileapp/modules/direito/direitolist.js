@@ -58,11 +58,10 @@ function getDireito() {
                 console.log(data);
                 var json = $.parseJSON(data);
                 console.log(json);
-                    //$("#nome").val(
                     document.getElementById("nome").textContent += json.direito[0].nome;
-                    document.getElementById("descricao").textContent += json.direito[0].nome;
+                    document.getElementById("descricao").textContent += json.direito[0].descricao;
                     
-                    console.log(json.direito[0].nome);
+                    console.log(json.direito[0].descricao);
             }
         });
 }
