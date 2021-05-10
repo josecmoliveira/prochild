@@ -17,12 +17,12 @@ function getNoticiasList() {
                 console.log(count);
                 for (var i=0; i<count; i++) {
                     if(i==0){
-                       var row = $('<div class="carousel-item active" style="margin: 40px"><div class="carousel-caption"><h3 style="color: black;"><a id="link1" target="_self" href="'
-                               + json.noticia[i].link +'">' + json.noticia[i].nome+ '</h3><p style="color: black;">' +
+                       var row = $('<div class="carousel-item active" style="width: 75%; margin: 10px;"><div class="carousel-caption"><h3><a id="link1" target="_blank" href="'
+                               + json.noticia[i].link +'">' + json.noticia[i].nome+ '</h3><p>' +
                                json.noticia[i].descricao + '</p></div></div>');
                        $('#noticiaslide').append(row);
-                   } else{var row = $('<div class="carousel-item"><div class="carousel-caption"><h3 style="color: black;"><a id="link1" target="_self" href="'
-                               + json.noticia[i].link +'">' + json.noticia[i].nome+ '</h3><p style="color: black;">' +
+                   } else{var row = $('<div class="carousel-item" style="width: 75%; margin: 10px;"><div class="carousel-caption"><h3><a id="link1" target="_blank" href="'
+                               + json.noticia[i].link +'">' + json.noticia[i].nome+ '</h3><p>' +
                                json.noticia[i].descricao + '</p></div></div>');
                        $('#noticiaslide').append(row);}
                        
