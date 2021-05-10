@@ -38,6 +38,9 @@ public class DireitoController extends HttpServlet{
             case "findAllDireitos":
                findAllDireitos(request, response);
                 break;
+            case "findDireitoById":
+               findDireitoById(request, response);
+                break;
             case "insertDireito":
                 insertDireito(request, response);
                 break;
@@ -194,7 +197,7 @@ public class DireitoController extends HttpServlet{
                 array.put(direito.toJSON());
             
             object.put("result", "OK");
-            object.put("assistente", array);
+            object.put("direito", array);
             
             pw = response.getWriter();
             pw.write(object.toString());
