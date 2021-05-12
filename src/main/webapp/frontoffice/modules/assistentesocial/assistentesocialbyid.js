@@ -11,7 +11,7 @@ $(document).ready(function () {
 function getAssistente() {
     $.ajax({
             url: 'http://localhost:8080/prochild/AssistenteSocialController',
-            data: {'pwhat': 'findAssistenteById', 'assistenteId': 1},
+            data: {'pwhat': 'findAssistenteById', 'assistentesocial_userId':localStorage.getItem("userId")},
             beforeSend: function (xhr) {                
                 console.log("teste_before");
             },

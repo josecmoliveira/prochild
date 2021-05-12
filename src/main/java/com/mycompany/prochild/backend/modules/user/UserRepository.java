@@ -133,20 +133,31 @@ public class UserRepository {
     public int insertUser(User user) {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        PreparedStatement pstmt2 = null;
         int result = 0;
+        ResultSet rs = null;
         
-        String sql = "INSERT INTO users (username, password) VALUES (?,?)";
+        String sql = "INSERT INTO users (username, password, nome) VALUES (?,?,?)";
         
-        try {
+        try {   
             conn = DataBaseConnection.getConnection();
+            
             pstmt = conn.prepareStatement(sql);
             
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
-//            pstmt.setString(3, user.getNome());
+            pstmt.setString(3, user.getNome());
             
             result = pstmt.executeUpdate();
-
+            
+            if (result == 1){
+                String sql2 = "Select * from users where username = ?";
+                pstmt2 = conn.prepareStatement(sql2);
+                pstmt2.setString(1, user.getUsername());
+                rs = pstmt2.executeQuery();   
+                rs.next();
+                return rs.getInt("userId");               
+            }
         } catch (Exception e) {
             result = -1;
             System.out.println("Erro insertUser " + e.getMessage());
@@ -168,8 +179,7 @@ public class UserRepository {
             }
 
         }
-        
-        return result;
+           return -1;
     }
     
     public int updateUser(User user) {
@@ -213,5 +223,59 @@ public class UserRepository {
         }
         
         return result;
+    }
+    
+    public User findUserByName(String username){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        User user = null;
+        
+        final String sql = "Select * from users where username = ?";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, username);
+            
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));        
+                user.setUserId(rs.getInt("userId")); 
+            }
+        } catch (Exception e) {
+            
+            System.out.println("Erro findUserByName " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return user;
     }
 }

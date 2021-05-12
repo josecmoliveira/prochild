@@ -6,7 +6,9 @@
 package com.mycompany.prochild.backend.controllers;
 
 import com.mycompany.prochild.backend.models.AssistenteSocial;
+import com.mycompany.prochild.backend.models.User;
 import com.mycompany.prochild.backend.modules.assistentesocial.AssistenteSocialServices;
+import com.mycompany.prochild.backend.modules.user.UserServices;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -28,6 +30,7 @@ import org.json.JSONObject;
 public class AssistenteSocialController extends HttpServlet{
     
     private AssistenteSocialServices assistenteservice = new AssistenteSocialServices();
+    private UserServices userservice = new UserServices();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
@@ -50,6 +53,9 @@ public class AssistenteSocialController extends HttpServlet{
             case "findAssistenteById":
                 findAssistenteById(request, response);
                 break; 
+            case "registarAssistente":
+                registarAssistente(request, response);
+                break;            
         }        
     }
     
@@ -197,13 +203,13 @@ public class AssistenteSocialController extends HttpServlet{
 
         JSONObject object = new JSONObject();
         JSONArray array = new JSONArray();
-        String assistenteId = request.getParameter("assistenteId");
+        String assistentesocial_userId = request.getParameter("assistentesocial_userId");
         
         PrintWriter pw = null;
         try {
             object.put("result", "KO");
             
-           AssistenteSocial assistente = assistenteservice.findAssistenteById(Integer.parseInt(assistenteId));
+           AssistenteSocial assistente = assistenteservice.findAssistenteById(Integer.parseInt(assistentesocial_userId));
             
                 array.put(assistente.toJSON());
             
@@ -218,4 +224,46 @@ public class AssistenteSocialController extends HttpServlet{
             pw.close();
         }
     }
+    
+    private void registarAssistente(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String nifString = request.getParameter("nif");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        try {
+                    
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);              
+            user.setNome(nome);
+            
+            int result = userservice.insertUser(user);            
+            if(!nome.equals("") && result>-1) {
+                AssistenteSocial assistente = new AssistenteSocial();
+                assistente.setNome(nome);
+                assistente.setEmail(email);
+                assistente.setNif(Integer.parseInt(nifString));
+                assistente.setUserId(result);
+                
+                int result2 = assistenteservice.insertAssistente(assistente);
+                object.put("result", result2 == 1);                   
+            }else{
+                object.put("result", false);
+            }
+                        
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(AssistenteSocialController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+    
 }
