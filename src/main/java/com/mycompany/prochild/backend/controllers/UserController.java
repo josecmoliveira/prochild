@@ -5,8 +5,10 @@
  */
 package com.mycompany.prochild.backend.controllers;
 
+import com.mycompany.prochild.backend.models.AssistenteSocial;
 import com.mycompany.prochild.backend.models.User;
 import com.mycompany.prochild.backend.modules.user.UserServices;
+import com.mycompany.prochild.backend.modules.assistentesocial.AssistenteSocialServices;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -28,6 +30,7 @@ import org.json.JSONObject;
 public class UserController extends HttpServlet{
     
     private UserServices userservice = new UserServices();
+    private AssistenteSocialServices assistenteservice = new AssistenteSocialServices();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
@@ -46,6 +49,9 @@ public class UserController extends HttpServlet{
                 break;
             case "updateUser":
                 updateUser(request, response);
+                break;
+            case "userLogin":
+                userLogin(request, response);
                 break;
         }        
     }
@@ -159,7 +165,6 @@ public class UserController extends HttpServlet{
         
         String username = request.getParameter("username");
         String password = request.getParameter("password");
- 
         try {
             object.put("result", "KO");
                     
@@ -173,6 +178,35 @@ public class UserController extends HttpServlet{
                 object.put("result", "OK");
             }
                         
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+    
+     private void userLogin(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        PrintWriter pw = null;
+        try {           
+            
+           User user = userservice.findUserByName(username);
+            boolean isValid = user.getPassword().equals(password);   
+            
+                                      
+            object.put("result", isValid);           
+            if (isValid){
+                object.put("userId",user.getUserId());
+                AssistenteSocial assistente = assistenteservice.findAssistenteById(user.getUserId());
+                object.put("isAssistenteSocial",assistente != null);
+                
+            }
             pw = response.getWriter();
             pw.write(object.toString());
         } catch (IOException ex) {

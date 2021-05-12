@@ -1,0 +1,68 @@
+div {
+    width: 100%;
+    height: 5vh;
+}
+
+.barra {
+    background-color: #FFC700;
+    width: 100%;
+    height: 20vh;
+    color: white;
+    text-align: center;
+}
+
+.conteudo {
+    background: white;
+    width: 100%;
+    height: 80vh;
+}
+
+.imgdireitos {
+    width: 220px;
+    height: 200px;
+    position: relative;
+    top:-42%;
+}
+
+body {
+    position: fixed;
+    margin: 50px;
+    text-align: center;
+}
+
+.voltar{
+    color: #FF3D00;
+    font-weight: 500;
+    font-size: 50px;
+    text-transform: uppercase;
+    position: absolute;
+    left: 4%;
+    top:7%;
+}
+
+.botaovoltar {
+    position: relative;
+    bottom:50px;
+    right:35px;
+    font-size:40px;
+    color:#FF3D00;
+   }
+   
+a:visited {
+    color:#FF3D00 !important;
+   }
+   
+.tabela {
+    width: 100%;
+    text-align: center;
+  }
+  
+.tabela tbody tr:focus {
+    color: white;
+    background-color: #FF3D00;
+    outline: 0;
+  }
+  
+.titulotabela {
+    color:#FF3D00; 
+  }

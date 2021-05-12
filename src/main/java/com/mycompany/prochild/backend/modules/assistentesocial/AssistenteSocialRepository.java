@@ -75,21 +75,19 @@ public class AssistenteSocialRepository {
         return assistentes;
     }
     
-    public AssistenteSocial findAssistenteById(int assistenteId) {
+    public AssistenteSocial findAssistenteById(int assistentesocial_userId) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         AssistenteSocial assistente = null;
         
-        final String sql = "Select * from assistentesocial where assistenteId = ?";
-        
+        final String sql = "Select * from assistentesocial where assistentesocial_userId = ?";
         try {
             conn = DataBaseConnection.getConnection();
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, assistenteId);
+            pstmt.setInt(1, assistentesocial_userId);
             
-            rs = pstmt.executeQuery();
-
+            rs = pstmt.executeQuery();        
             while (rs.next()) {
                 assistente = new AssistenteSocial();
                 assistente.setAssistenteId(rs.getInt("assistenteId"));
@@ -98,7 +96,7 @@ public class AssistenteSocialRepository {
                 assistente.setEmail(rs.getString("email"));
                 assistente.setNif(rs.getInt("nif"));
             }
-
+                
         } catch (Exception e) {
             
             System.out.println("Erro findAssistenteById " + e.getMessage());

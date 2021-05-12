@@ -31,4 +31,8 @@ public class UserServices {
     public int updateUser(User usr) {
         return user.updateUser(usr);
     }
+    
+    public User findUserByName(String username) {
+        return user.findUserByName(username);
+    }
 }

@@ -25,3 +25,17 @@ function getUserList() {
         });
 };
 
+/*function getUser() {
+    $.ajax({
+            url: 'http://localhost:8080/prochild/UserController/',
+            data: {'pwhat': 'findUser'},
+            beforeSend: function (xhr) {                
+                console.log("teste_before");
+            },
+            success: function (data) {
+                console.log("teste_success");
+                var json = $.parseJSON(data);
+                console.log(json);
+            }
+        });
+};*/
