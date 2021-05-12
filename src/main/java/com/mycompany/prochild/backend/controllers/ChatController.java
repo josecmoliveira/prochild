@@ -46,10 +46,10 @@ public class ChatController extends HttpServlet{
                findAllMensagensInConversa(request, response);
                 break;
             case "startConversa":
-                //quando o utilizador escolhe outro utilizador com quem ainda n tem conversa
+                startConversa(request, response);
                 break;
             case "sendMensagem":
-                //quando o utilizador manda mensagem para outro (é preciso atualizar a data da ultima mensagem na tabela das conversas)
+                sendMessage(request, response);
         }        
     }
     
@@ -110,6 +110,60 @@ public class ChatController extends HttpServlet{
             pw.write(object.toString());
         } catch (IOException ex) {
             System.out.println("ChatController.findAllConversasForUser " + ex);
+            ex.printStackTrace();
+        } finally {
+            pw.close();
+        }
+    }
+    
+    private void startConversa(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String currentUserIdString = request.getParameter("current_userId");
+        String otherUserIdString = request.getParameter("other_userId");
+        
+        try {
+            int currentUserId = Integer.parseInt(currentUserIdString);
+            int otherUserId = Integer.parseInt(otherUserIdString);
+            
+            object.put("result", chatServices.startConversa(currentUserId, otherUserId));
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            System.out.println("ChatController.findAllConversasForUser " + ex);
+            ex.printStackTrace();
+        } finally {
+            pw.close();
+        }
+    }
+    
+    private void sendMessage(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String userIdString = request.getParameter("userId");
+        String conversaIdString = request.getParameter("conversaId");
+        String message = request.getParameter("message");
+        
+        try {
+            int userId = Integer.parseInt(userIdString);
+            int conversaId = Integer.parseInt(conversaIdString);
+            
+            object.put("result", "KO");
+            
+            Mensagem mensagem = chatServices.sendMensagem(userId, message, conversaId);
+            
+            if(mensagem.getId() > 0) {
+                object.put("result", "OK");
+                object.put("mensagem", mensagem.toJSON());
+            }
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            System.out.println("ChatController.sendMessage " + ex);
             ex.printStackTrace();
         } finally {
             pw.close();

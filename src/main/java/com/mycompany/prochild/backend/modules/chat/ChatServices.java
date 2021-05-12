@@ -56,4 +56,66 @@ public class ChatServices {
         return mensagens;
     }
     
+    public String startConversa(int currentUserId, int otherUserId) {
+        String result = "KO";
+        
+        try {
+            User currentUser = userServices.findUserById(currentUserId);
+            User otherUser = userServices.findUserById(otherUserId);
+            
+            //Insert conversa
+            int conversaIdInserted = conversaRepository.insertConversa();
+            
+            if(conversaIdInserted <= 0) {
+                return result; 
+            }
+            
+            //Insert participante utilizador atual
+            int resultParticipant_1 = conversaRepository.insertConversaParticipants(currentUser, conversaIdInserted);
+            
+            if(resultParticipant_1 <= 0) { 
+                return result; 
+            }
+            
+            //Insert participante outro utilizador
+            int resultParticipant_2 = conversaRepository.insertConversaParticipants(otherUser, conversaIdInserted);
+            
+            if(resultParticipant_2 <= 0) { 
+             return result; 
+            }
+            
+            result = "OK";
+                    
+        } catch(Exception e) {
+            System.out.println("ConversaServices.startConversa " + e);
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    public Mensagem sendMensagem(int userId, String conteudo, int conversaId) {
+        Mensagem mensagem = new Mensagem();
+        
+        try {
+            User user = userServices.findUserById(userId);
+            
+            mensagem.setConteudo(conteudo);
+            mensagem.setUser(user);
+            
+            //Insert mensagem
+            int mensagemIdInserted = mensagemRepository.insertMensagem(mensagem, conversaId);
+            
+            if(mensagemIdInserted > 0) {
+                mensagem.setId(mensagemIdInserted); 
+                conversaRepository.updateConversaLastMessage();
+            }
+                
+        } catch(Exception e) {
+            System.out.println("ConversaServices.sendMensagem " + e);
+            e.printStackTrace();
+        }
+        
+        return mensagem;
+    }
 }

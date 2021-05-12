@@ -11,6 +11,7 @@ import com.mycompany.prochild.sql_connection.DataBaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,5 +140,128 @@ public class ConversaRepository {
         }
         
         return participant;
+    }
+    
+    public int insertConversa() {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "INSERT INTO conversa (data_inicio) VALUES (CURRENT_TIMESTAMP);";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            result = pstmt.executeUpdate();
+            
+            if(result > 0) {
+                ResultSet rs = pstmt.getGeneratedKeys();
+                
+                rs.next();
+
+                result = rs.getInt(1);
+            }
+            
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro insertConversa " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
+    
+    public int insertConversaParticipants(User user, int conversaId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "INSERT INTO conversa_users (conversa_users_userId, conversa_users_conversaId) VALUES (?, ?);";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, user.getUserId());
+            pstmt.setInt(2, conversaId);
+            
+            result = pstmt.executeUpdate();
+            
+            
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro insertConversaParticipants " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
+    
+    public int updateConversaLastMessage() {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "UPDATE conversa set data_ultima_mensagem = CURRENT_TIMESTAMP;";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            result = pstmt.executeUpdate();
+            
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro updateConversaLastMessage " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
     }
 }
