@@ -44,7 +44,7 @@ public class DireitoController extends HttpServlet{
             case "insertDireito":
                 insertDireito(request, response);
                 break;
-            case "updateDireito":
+            case "updateDescricao":
                 updateDescricao(request, response);
                 break;            
         }        
@@ -162,7 +162,7 @@ public class DireitoController extends HttpServlet{
             object.put("result", "KO");
                     
             if(!direitoIdString.equals("")) {
-                Direito direito = new Direito();
+                Direito direito = direitoservice.findDireitoById(Integer.parseInt(direitoIdString));
                 direito.setDescricao(descricao);
                 
                 int result = direitoservice.updateDescricao(direito);
