@@ -35,7 +35,7 @@ public class ClienteRepository {
             while (rs.next()) {
                 Cliente cliente = new Cliente();
                 
-                cliente.setUserId(rs.getInt("clientes_userId"));
+                cliente.setUserId(rs.getInt("cliente_userId"));
                 cliente.setClienteId(rs.getInt("clienteId"));
                 cliente.setNome(rs.getString("nome"));
                 cliente.setEmail(rs.getString("email"));
@@ -76,19 +76,18 @@ public class ClienteRepository {
         return clientes;
     }
     
-    public Cliente findClienteById(int clienteId) {
-        List<Cliente> clientes = new ArrayList();
+    public Cliente findClienteById(int cliente_userId) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Cliente cliente = null;
         
-        final String sql = "Select * from cliente where clienteId = ?";
+        final String sql = "Select * from clientes where cliente_userId = ?";
         
         try {
             conn = DataBaseConnection.getConnection();
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, clienteId);
+            pstmt.setInt(1, cliente_userId);
             
             rs = pstmt.executeQuery();
 
@@ -139,7 +138,7 @@ public class ClienteRepository {
         PreparedStatement pstmt = null;
         int result = 0;
         
-        String sql = "INSERT INTO clientes (nome, email, genero, tipo, clientes_userId) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO clientes (nome, email, genero, tipo, cliente_userId) VALUES (?,?,?,?,?)";
         
         try {
             conn = DataBaseConnection.getConnection();

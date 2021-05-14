@@ -1,4 +1,3 @@
-
 function registarAssistente() {
     $.ajax({
             url: 'http://localhost:8080/prochild/AssistenteSocialController',

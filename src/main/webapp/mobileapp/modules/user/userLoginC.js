@@ -1,8 +1,7 @@
-
-function getUser() {
+function userLoginC() {
     $.ajax({
             url: 'http://localhost:8080/prochild/UserController',
-            data: {'pwhat': 'userLogin', "username": document.getElementById("inputUsername").value, "password": document.getElementById("inputPassword").value},
+            data: {'pwhat': 'userLoginC', "username": document.getElementById("inputUsername").value, "password": document.getElementById("inputPassword").value},
             beforeSend: function (xhr) {                
                 console.log("teste_before");
             },
@@ -12,16 +11,17 @@ function getUser() {
                 console.log(typeof json.result);
                 
                 if (json.result){
-                    if(!json.isAssistenteSocial){
-                        alert("User não é um Assistente Social");
+                    if(!json.isCliente){
+                        alert("User não é um Cliente");
                         return;
                     }
-                    window.location.replace('perfil.html');
-                    localStorage.setItem("userId", json.userId);
+                    window.location.replace('PagInicial.html');
+                    localStorage.setItem("userIdE", json.userId);
                 }else{
-                    alert("password errada");
+                    alert("Password errada");
                 }
             }
             
         });
 };
+

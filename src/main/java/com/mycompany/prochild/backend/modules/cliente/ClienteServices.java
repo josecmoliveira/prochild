@@ -24,8 +24,8 @@ public class ClienteServices {
         return cliente.insertCliente(new_cliente);
     }
     
-    public Cliente findClienteById(int clienteId) {
-        return cliente.findClienteById(clienteId);
+    public Cliente findClienteById(int cliente_userId) {
+        return cliente.findClienteById(cliente_userId);
     }
     
     public int updateCliente(Cliente clt) {
