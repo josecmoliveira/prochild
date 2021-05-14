@@ -26,7 +26,7 @@ function getVideosList() {
                        $('#grid').append(row);
                        console.log(json.lenght);
                        $('a').click ( function() {
-                            var row = $(this).closest('tr');
+                            var row = $(this).closest('button');
                             row1 = row.find('td:eq(0)').text();
                             id = row1;
                             setId(id);
@@ -46,7 +46,7 @@ function setId(val) {
 }
 
 
-function getvideo() {
+function getVideo() {
     var newid = localStorage.getItem("id");
     $.ajax({
             url: 'http://localhost:8080/prochild/VideoController',
