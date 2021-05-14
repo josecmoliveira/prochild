@@ -73,6 +73,7 @@ function updateDescricao(){
             },
                 success: function (data) {
                     console.log("Descrição Atualizada");
+                    window.location.replace('tema1.html');
             }
         });
     }

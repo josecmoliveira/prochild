@@ -22,7 +22,7 @@ function getVideosList() {
                 var count = Object.keys(json.video).length;
                 console.log(count);
                 for (var i=0; i<count; i++) {
-                       var row = $('<tr><td><iframe width="100%" height="100%" margin="20px" padding="35px" src="'+ json.video[i].link 
+                       var row = $('<tr><td><iframe width="560" height="315" margin-left="20px" padding="35px" src="'+ json.video[i].link 
                                +'" title="YouTube video player" frameborder="0" allow="accelerometer; \n\
                                 autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td></tr>');
                        $('#conteudo').append(row);

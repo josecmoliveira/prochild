@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 
-$(document).ready(function () {
-    getVideosList();
-});
+var id;
 
 function getVideosList() {
     $.ajax({
@@ -22,11 +20,68 @@ function getVideosList() {
                 var count = Object.keys(json.video).length;
                 console.log(count);
                 for (var i=0; i<count; i++) {
-                       var row = $('<iframe width="400" height="280" src="'+ json.video[i].link +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+                        var button = document.createElement("button");
+                        var button1 = (button.innerHTML = '<a id="link1" target="_self" href="video2.html">' + json.video[i].nome + '</a>');
+                        var row = $(button1 + '<iframe width="400" height="280" src="'+ json.video[i].link +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
                        $('#grid').append(row);
                        console.log(json.lenght);
+                       $('a').click ( function() {
+                            var row = $(this).closest('tr');
+                            row1 = row.find('td:eq(0)').text();
+                            id = row1;
+                            setId(id);
+                            console.log(id);
+                        })
                 }   
             }
         });
 }
 
+
+
+function setId(val) {
+    id = val;
+    localStorage.setItem("id", id);
+    console.log();    
+}
+
+
+function getvideo() {
+    var newid = localStorage.getItem("id");
+    $.ajax({
+            url: 'http://localhost:8080/prochild/VideoController',
+            data: {'pwhat': 'findVideoById', 'videoId': newid},
+            beforeSend: function (xhr) {                
+                console.log("teste_before");
+            },
+            success: function (data) {
+                console.log("teste_success");
+                console.log(data);
+                var json = $.parseJSON(data);
+                console.log(json);
+                    document.getElementById("nomevideo").textContent += json.video[0].nome;
+                     document.getElementById("linkvideo").textContent += json.video[0].link;
+                    document.getElementById("descricaovideo").textContent += json.video[0].descricao;
+                   
+            }
+        });
+}
+
+
+function updateVideo(){
+            var newid = localStorage.getItem("id");
+            $.ajax({
+                url: 'http://localhost:8080/prochild/VideoController',
+                data: {'pwhat': 'updateVideo', "videoId": newid, "nome": document.getElementById("nomevideo").value,
+                    "link": document.getElementById("linkvideo").value, "descricao": document.getElementById("descricaovideo").value,
+                    "disponivel": 1},
+                beforeSend: function (xhr) {                
+                    console.log("O video vai ser atualizado");
+                    
+            },
+                success: function (data) {
+                    console.log("Video Atualizado");
+                    window.location.replace('videos.html');
+            }
+        });
+    }

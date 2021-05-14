@@ -11,11 +11,11 @@
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
         <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-        <script src="../../modules/direito/direitolist.js"></script>
+        <script src="../../modules/video/videolist.js"></script>
         <link rel="icon" href="assets/img/icone.png"/>
         <script>
         window.onload = function () {
-        getDireito();
+        getvideo();
        }
         </script>
     </head>
@@ -54,8 +54,9 @@
             </div>
             <div>
                 <form class="formcaixadetexto">
-                <h3 id="nomeDireito"></h3>
-                <textarea id="descricaoDireito" class="caixadetexto"></textarea>
+                <input id="nomevideo"/>
+                 <input id="linkvideo"/>
+                <textarea id="descricaovideo" class="caixadetexto"></textarea>
                 <button type="submit" class="botaoguardar1" onclick="updateDescricao()">GUARDAR</button>
                 </form>
             </div>
