@@ -16,7 +16,10 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/73d5433c80.js" crossorigin="anonymous"></script>
-
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script src="../modules/cliente/registarCliente.js"></script>
     <title> GetYourRights! </title>
     <link rel="icon" href="Imagens/icone.png"/>
 </head>
@@ -34,7 +37,7 @@
     <div class="barra">
         <img src="Imagens/barra.png">
         <p></p>
-        <a role="button" href="PagInicial.html" class="botaovoltar"> <i class="fas fa-arrow-alt-circle-left"></i></a>
+        <a role="button" href="IniciarSessão.html" class="botaovoltar"> <i class="fas fa-arrow-alt-circle-left"></i></a>
         <text class="titulo"> Registo </text>
         <img class="imgregisto" src="Imagens/registo.png">
     </div>
@@ -45,60 +48,61 @@
             <div class="form-group">
                 <label for="myNome" class="col-lg-2 control-label">Nome Completo</label>
                 <div class="col-lg-7">
-                    <input type="myNome" class="form-control" id="nome"></text>
+                    <input type="myNome" class="form-control" id="inputName"></text>
                 </div>
-
-                <p></p>
-                <label for="start" class="col-lg-2 control-label">Data de Nascimento</label>
-                <div class="col-lg-7">
-                    <input class="data" id="date" type="date">
-                </div>
-
+                
                 <p></p>
                 <label for="myEmail" class="col-lg-2 control-label">Email </label>
                 <div class="col-lg-7">
-                    <input type="myEmail" class="form-control" id="email"></text>
+                    <input type="myEmail" class="form-control" id="inputEmail"></text>
                 </div>
 
                 <p></p>
                 <label class="col-lg-2 control-label"> Género</label>
                 <div class="radio-toolbar">
-                    <input type="radio" id="radio1" name="radio1" value="masculino">
+                    <input type="radio" id="radio1" name="radio1" value="M">
                     <label for="radio1">Masculino</label>
         
-                    <input type="radio" id="radio2" name="radio1" value="feminino">
+                    <input type="radio" id="radio2" name="radio1" value="F">
                     <label for="radio2">Feminino</label>
                 </div>
 
                 <p></p>
                 <label class="col-lg-2 control-label"> Tipo de Utilizador</label>
                 <div class="radio-toolbar">
-                    <input type="radio" id="radio3" name="radio2" value="criança">
+                    <input type="radio" id="radio3" name="radio2" value="C">
                     <label for="radio3">Criança</label>
         
-                    <input type="radio" id="radio4" name="radio2" value="encarregadodeeducação">
+                    <input type="radio" id="radio4" name="radio2" value="E">
                     <label for="radio4">Encarregado de Educação</label>
                 </div>
                 
                 <p></p>
                 <label for="myUsername" class="col-lg-2 control-label">Username</label>
                 <div class="col-lg-7">
-                    <input type="myUsername" class="form-control" id="username"></text>
+                    <input type="myUsername" class="form-control" id="inputUsername"></text>
                 </div>
 
                 <p></p>
                 <label for="myPassword" class="col-lg-2 control-label">Password</label>
                 <div class="col-lg-7">
-                    <input type="myPassword" class="form-control" id="password"></text>
+                    <input type="myPassword" type="password" placeholder="Password" class="form-control" id="inputPassword"></text>
                 </div>
 
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <a class="botaoregistar" id="botaoregistar" role="button"> REGISTAR </a>
+                        <a class="botaoregistar" id="botaoregistar" onclick="registarCliente()" role="button"> REGISTAR </a>
                     </div>
             </div>
         </form>
     </div>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/datatables-demo.js"></script>
 </body>
 
 </html>
