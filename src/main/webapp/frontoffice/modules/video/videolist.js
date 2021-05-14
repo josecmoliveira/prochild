@@ -22,7 +22,7 @@ function getVideosList() {
                 for (var i=0; i<count; i++) {
                         var button = document.createElement("button");
                         var button1 = (button.innerHTML = '<a id="link1" target="_self" href="video2.html">' + json.video[i].nome + '</a>');
-                        var row = $(button1 + '<iframe width="400" height="280" src="'+ json.video[i].link +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+                        var row = $('<iframe width="400" height="280" src="'+ json.video[i].link +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
                        $('#grid').append(row);
                        console.log(json.lenght);
                        $('a').click ( function() {

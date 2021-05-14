@@ -5,6 +5,7 @@
  */
 package com.mycompany.prochild.backend.controllers;
 
+import com.mycompany.prochild.backend.models.Direito;
 import com.mycompany.prochild.backend.models.Video;
 import com.mycompany.prochild.backend.modules.video.VideoServices;
 import java.io.IOException;
@@ -43,6 +44,9 @@ public class VideoController extends HttpServlet{
                 break;
             case "updateVideo":
                 updateVideo(request, response);
+                break;
+            case "findVideoById":
+                insertVideo(request, response);
                 break;
         }        
     }
@@ -191,4 +195,33 @@ public class VideoController extends HttpServlet{
             pw.close();
         }
     }
+    
+     private void findVideoById(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        JSONArray array = new JSONArray();
+        String videoId = request.getParameter("videoId");
+        
+        PrintWriter pw = null;
+        try {
+            object.put("result", "KO");
+            
+           Video video = videoservice.findVideoById(Integer.parseInt(videoId));
+            
+                array.put(video.toJSON());
+            
+            object.put("result", "OK");
+            object.put("video", array);
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(VideoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+   
+    
 }
+

@@ -15,6 +15,7 @@ public class Noticia extends AssistenteSocial{
     private String nome;
     private String link;
     private String descricao;
+     private String disponivel;
 
     public int getNoticiaId() {
         return noticiaId;
@@ -46,6 +47,14 @@ public class Noticia extends AssistenteSocial{
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    
+    public String getDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(String disponivel) {
+        this.disponivel = disponivel;
     }
     
     public JSONObject toJSON() {

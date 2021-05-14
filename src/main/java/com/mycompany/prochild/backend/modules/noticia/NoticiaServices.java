@@ -19,6 +19,10 @@ public class NoticiaServices {
         return noticia.findAllNoticias();
     }
     
+    public Noticia findNoticiaById(int noticiaId) {
+        return noticia.findNoticiaById(noticiaId);
+    }
+    
     public int insertNoticia(Noticia ntc){
         return noticia.insertNoticia(ntc);
     }

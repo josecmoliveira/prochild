@@ -74,6 +74,62 @@ public class NoticiaRepository {
         return noticias;
     }
     
+    public Noticia findNoticiaById(int noticiaId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Noticia noticia = null;
+        
+        final String sql = "Select * from noticias where noticiaId = ?";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, noticiaId);
+            
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                noticia = new Noticia();
+                noticia.setAssistenteId(rs.getInt("noticias_assistenteId"));
+                noticia.setNoticiaId(rs.getInt("noticiaId"));
+                noticia.setNome(rs.getString("nome"));
+                noticia.setLink(rs.getString("link"));
+                noticia.setDescricao(rs.getString("descricao"));
+            }
+
+        } catch (Exception e) {
+            
+            System.out.println("Erro findVideoById " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return noticia;
+    }
+    
     public int insertNoticia(Noticia noticia) {
         Connection conn = null;
         PreparedStatement pstmt = null;

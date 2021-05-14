@@ -11,11 +11,11 @@
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
         <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-        <script src="../../modules/video/videolist.js"></script>
+        <script src="../../modules/noticia/noticialist.js"></script>
         <link rel="icon" href="assets/img/icone.png"/>
         <script>
         window.onload = function () {
-        getVideo();
+        getNoticia();
        }
         </script>
     </head>
@@ -32,12 +32,12 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="temas1" href="tema1.html">Temas</a>
+                            <a class="temas1" href="tema1.html" style="color:white">Temas</a>
                             <a class="fórum" href="forum1.html">Fórum</a>
                             <a class="chat">Chat</a>
                             <a class="vídeos" href="videos.html">Vídeos</a>
                             <a class="jogos" href="jogos.html">Jogos</a>
-                            <a class="notícias" href="noticias.html">Notícias</a>
+                            <a class="notícias" href="noticias.html" style="color:#FF3D00;">Notícias</a>
                             <a class="utilizadores" href="utilizadores.html">Utilizadores</a>
                             <a class="perfil" href="perfil.html">Perfil</a>
                             <a class="terminarsessão" href="terminarsessão.html"><i class="fas fa-door-open"></i> Terminar Sessão</a>
@@ -49,15 +49,15 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <text class="titulo1">TEMAS</text>  
+                        <text class="titulo1">NOTÍCIAS</text>  
                     </div>
             </div>
             <div>
                 <form class="formcaixadetexto">
-                <textarea id="nomevideo"/> </textarea>
-                 <textarea id="linkvideo"/></textarea>
-                <textarea id="descricaovideo" class="caixadetexto"></textarea>
-                <button type="submit" class="botaoguardar1" onclick="updateDescricao()">GUARDAR</button>
+                <textarea id="nomenoticia"/></textarea>
+                 <textarea id="linknoticia"/></textarea>
+                <textarea id="descricaonoticia" class="caixadetexto"></textarea>
+                <button type="submit" class="botaoguardar1" onclick="updateNoticia()">GUARDAR</button>
                 </form>
             </div>
     </main>

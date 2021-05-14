@@ -44,6 +44,12 @@ public class NoticiaController extends HttpServlet{
             case "insertNoticia":
                 insertNoticia(request, response);
                 break;
+            case "updateNoticia":
+                updateNoticia(request, response);
+                break;
+            case "findNoticiaById":
+                findNoticiaById(request, response);
+                break;
             
         }        
     }
@@ -149,4 +155,74 @@ public class NoticiaController extends HttpServlet{
             pw.close();
         }
     }
+    
+    
+    private void updateNoticia(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String noticiaId = request.getParameter("noticia_id");
+        String nome = request.getParameter("nome");
+        String link = request.getParameter("link");
+        String descricao = request.getParameter("descricao");
+        String disponivel = request.getParameter("disponivel");
+        
+        
+        try {
+            object.put("result", "KO");
+                    
+            if(!noticiaId.equals("")) {
+                Noticia noticia = noticiaservice.findNoticiaById(Integer.parseInt(noticiaId));
+                
+                if(noticia != null) {
+                    noticia.setNome(nome);
+                    noticia.setLink(link);
+                    noticia.setDescricao(descricao);
+                    noticia.setDisponivel(disponivel);
+                    
+                    int result = noticiaservice.updateNoticia(noticia);
+            
+                    if(result == 1) {
+                        object.put("result", "OK");
+                    }
+                }
+            }
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(NoticiaController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+    
+     private void findNoticiaById(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        JSONArray array = new JSONArray();
+        String noticiaId = request.getParameter("noticiaId");
+        
+        PrintWriter pw = null;
+        try {
+            object.put("result", "KO");
+            
+           Noticia noticia = noticiaservice.findNoticiaById(Integer.parseInt(noticiaId));
+            
+                array.put(noticia.toJSON());
+            
+            object.put("result", "OK");
+            object.put("noticia", array);
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(NoticiaController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+   
+
 }
