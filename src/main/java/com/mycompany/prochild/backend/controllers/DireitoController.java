@@ -46,7 +46,10 @@ public class DireitoController extends HttpServlet{
                 break;
             case "updateDescricao":
                 updateDescricao(request, response);
-                break;            
+                break;    
+            case "removeDireito":
+                removeDireito(request, response);
+                break;    
         }        
     }
     
@@ -181,7 +184,6 @@ public class DireitoController extends HttpServlet{
         }
     }
     
-    
     private void findDireitoById(HttpServletRequest request, HttpServletResponse response) {
 
         JSONObject object = new JSONObject();
@@ -198,6 +200,33 @@ public class DireitoController extends HttpServlet{
             
             object.put("result", "OK");
             object.put("direito", array);
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(DireitoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+    
+    private void removeDireito(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String direitoIdString = request.getParameter("direito_id");
+        
+        try {
+            object.put("result", "KO");
+                    
+            if(!direitoIdString.equals("")) {
+                int result = direitoservice.removeDireito(Integer.parseInt(direitoIdString));
+            
+                if(result == 1) {
+                    object.put("result", "OK");
+                }
+            }
             
             pw = response.getWriter();
             pw.write(object.toString());

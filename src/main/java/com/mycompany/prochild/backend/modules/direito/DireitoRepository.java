@@ -210,4 +210,44 @@ public class DireitoRepository {
         
         return result;
     }
+    
+    public int removeDireito(int direitoId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "DELETE FROM direitos WHERE direitoId = ?";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, direitoId);
+            
+            result = pstmt.executeUpdate();
+            
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro removeDireito " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
 }

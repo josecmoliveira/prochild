@@ -30,4 +30,8 @@ public class NoticiaServices {
     public int updateNoticia(Noticia ntc){
         return noticia.updateNoticia(ntc);
     }
+    
+    public int removeNoticia(int noticiaId) {
+        return noticia.removeNoticia(noticiaId);
+    }
 }

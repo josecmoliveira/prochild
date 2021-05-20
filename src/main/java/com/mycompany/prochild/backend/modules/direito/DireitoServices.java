@@ -29,4 +29,8 @@ public class DireitoServices {
     public int updateDescricao(Direito dir) {
         return direito.updateDescricao(dir);
     }
+    
+    public int removeDireito(int direitoId) {
+        return direito.removeDireito(direitoId);
+    }
 }

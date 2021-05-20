@@ -219,4 +219,44 @@ public class VideoRepository {
         
         return result;
     }
+    
+    public int removeVideo(int videoId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "DELETE FROM videos WHERE videoId = ?";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, videoId);
+            
+            result = pstmt.executeUpdate();
+            
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro removeVideo " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
 }

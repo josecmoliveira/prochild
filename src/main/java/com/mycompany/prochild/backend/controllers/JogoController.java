@@ -41,6 +41,10 @@ public class JogoController extends HttpServlet{
             case "insertJogoo":
                 insertJogo(request, response);
                 break;
+            case "removeJogo":
+                removeJogo(request, response);
+                break;
+                
             
         }        
     }
@@ -132,6 +136,34 @@ public class JogoController extends HttpServlet{
                 jogo.setAssistenteId(Integer.parseInt(assistenteIdString));
                 
                 int result = jogoservice.insertJogo(jogo);
+            
+                if(result == 1) {
+                    object.put("result", "OK");
+                }
+            }
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(JogoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
+    
+    private void removeJogo(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String jogoId = request.getParameter("jogo_id");
+        
+        try {
+            object.put("result", "KO");
+                    
+            if(!jogoId.equals("")) {
+                
+                int result = jogoservice.removeJogo(Integer.parseInt(jogoId));
             
                 if(result == 1) {
                     object.put("result", "OK");

@@ -22,4 +22,8 @@ public class JogoServices {
     public int insertJogo(Jogo dir) {
         return jogo.insertJogo(dir);
     }
+    
+    public int removeJogo(int jogoId) {
+        return jogo.removeJogo(jogoId);
+    }
 }

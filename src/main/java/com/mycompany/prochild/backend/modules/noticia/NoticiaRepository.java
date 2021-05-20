@@ -217,4 +217,44 @@ public class NoticiaRepository {
         
         return result;
     }
+    
+    public int removeNoticia(int noticiaId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        String sql = "DELETE FROM noticias WHERE noticiaId = ?";
+        
+        try {
+            conn = DataBaseConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, noticiaId);
+            
+            result = pstmt.executeUpdate();
+            
+        } catch (Exception e) {
+            result = -1;
+            System.out.println("Erro removeNoticia " + e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+        
+        return result;
+    }
 }

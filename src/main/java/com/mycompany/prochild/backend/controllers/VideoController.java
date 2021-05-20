@@ -46,7 +46,10 @@ public class VideoController extends HttpServlet{
                 updateVideo(request, response);
                 break;
             case "findVideoById":
-                insertVideo(request, response);
+                findVideoById(request, response);
+                break;
+            case "removeVideo":
+                removeVideo(request, response);
                 break;
         }        
     }
@@ -196,7 +199,7 @@ public class VideoController extends HttpServlet{
         }
     }
     
-     private void findVideoById(HttpServletRequest request, HttpServletResponse response) {
+    private void findVideoById(HttpServletRequest request, HttpServletResponse response) {
 
         JSONObject object = new JSONObject();
         JSONArray array = new JSONArray();
@@ -222,6 +225,32 @@ public class VideoController extends HttpServlet{
         }
     }
    
-    
+    private void removeVideo(HttpServletRequest request, HttpServletResponse response) {
+
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String videoId = request.getParameter("video_id");
+
+        try {
+            object.put("result", "KO");
+                    
+            if(!videoId.equals("")) {
+                int result = videoservice.removeVideo(Integer.parseInt(videoId));
+
+                if(result == 1) {
+                    object.put("result", "OK");
+                }
+                
+            }
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(VideoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
 }
 

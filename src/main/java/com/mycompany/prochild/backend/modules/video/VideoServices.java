@@ -30,4 +30,8 @@ public class VideoServices {
     public int updateVideo(Video dir) {
         return video.updateVideo(dir);
     }
+    
+    public int removeVideo(int videoId) {
+        return video.removeVideo(videoId);
+    }
 }

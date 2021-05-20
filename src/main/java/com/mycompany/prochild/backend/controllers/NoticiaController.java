@@ -50,6 +50,9 @@ public class NoticiaController extends HttpServlet{
             case "findNoticiaById":
                 findNoticiaById(request, response);
                 break;
+            case "removeNoticia":
+                removeNoticia(request, response);
+                break;
             
         }        
     }
@@ -154,8 +157,7 @@ public class NoticiaController extends HttpServlet{
         } finally {
             pw.close();
         }
-    }
-    
+    } 
     
     private void updateNoticia(HttpServletRequest request, HttpServletResponse response) {
 
@@ -198,7 +200,7 @@ public class NoticiaController extends HttpServlet{
         }
     }
     
-     private void findNoticiaById(HttpServletRequest request, HttpServletResponse response) {
+    private void findNoticiaById(HttpServletRequest request, HttpServletResponse response) {
 
         JSONObject object = new JSONObject();
         JSONArray array = new JSONArray();
@@ -224,5 +226,31 @@ public class NoticiaController extends HttpServlet{
         }
     }
    
+    private void removeNoticia(HttpServletRequest request, HttpServletResponse response) {
 
+        JSONObject object = new JSONObject();
+        PrintWriter pw = null;
+        
+        String noticiaId = request.getParameter("noticia_id");
+        
+        try {
+            object.put("result", "KO");
+                    
+            if(!noticiaId.equals("")) {
+                
+                int result = noticiaservice.removeNoticia(Integer.parseInt(noticiaId));
+                
+                if(result == 1) {
+                    object.put("result", "OK");
+                }
+            }
+            
+            pw = response.getWriter();
+            pw.write(object.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(NoticiaController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            pw.close();
+        }
+    }
 }
