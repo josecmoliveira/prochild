@@ -10823,3 +10823,15 @@ text-transform: uppercase;
   left:450px;
   top:1150px;
 }
+
+.block {
+  display: block; 
+  width: 100%;
+  border: none;
+  background-color: #FF3D00;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+}
