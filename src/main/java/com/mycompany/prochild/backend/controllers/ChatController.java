@@ -49,7 +49,7 @@ public class ChatController extends HttpServlet{
                 startConversa(request, response);
                 break;
             case "sendMensagem":
-                sendMessage(request, response);
+                sendMessagem(request, response);
         }        
     }
     
@@ -139,7 +139,7 @@ public class ChatController extends HttpServlet{
         }
     }
     
-    private void sendMessage(HttpServletRequest request, HttpServletResponse response) {
+    private void sendMessagem(HttpServletRequest request, HttpServletResponse response) {
         JSONObject object = new JSONObject();
         PrintWriter pw = null;
         

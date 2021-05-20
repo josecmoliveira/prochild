@@ -5,6 +5,7 @@
  */
 
 var id;
+var id2;
 
 /*function getAssistentesList() {
     $.ajax({
@@ -71,19 +72,22 @@ function getConversasList() {
 function setId(val) {
     id = val;
     localStorage.setItem("id", id);
-                  console.log()     
+           
 }
 
 function setNome(val) {
-    id = val;
-    localStorage.setItem("idAssis", id);
-                  console.log()     
+    id2 = val;
+    localStorage.setItem("idAssis", id2);
+                     
+}
+
+function nomeAssis(){
+    var assis = localStorage.getItem("idAssis");
+    document.getElementById("nomeA").innerHTML = assis;
 }
 
 
 function getMensagensList() {
-    var assis = localStorage.getItem("idAssis");
-    $("#nomeA").append(assis);
     $.ajax({
             url: 'http://localhost:8080/prochild/ChatController',
             data: {'pwhat': 'findAllMensagensInConversa', 'conversaId': localStorage.getItem("id") },
@@ -126,3 +130,18 @@ function getMensagensList() {
             }
         });
 }
+
+
+function submitMensagem(){
+            $.ajax({
+                url: 'http://localhost:8080/prochild/ChatController',
+                data: {'pwhat': 'sendMessagem', "userId": localStorage.getItem("userIdE"), "mensagem": document.getElementById("mensagem").value, "conversaId": localStorage.getItem("id")},
+                beforeSend: function (xhr) {                
+                    console.log("Vai ser enviada uma mensagem");
+                    console.log(document.getElementById("mensagem").value);
+            },
+                success: function (data) {
+                    console.log("Mensagem adicionado");
+            }
+        });
+    }

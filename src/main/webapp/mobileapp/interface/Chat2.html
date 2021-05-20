@@ -27,6 +27,7 @@
     
     <script>
     window.onload = function () {
+        nomeAssis();
         getMensagensList();
        }
     </script>
@@ -51,11 +52,11 @@
                 <div class="msj-rta macro" style="margin:auto">                        
                     <div class="text text-r" style="background:whitesmoke !important">
                         <div class="grid-child purple">
-                            <div class="div1"><input class="mytext" placeholder="Escreve aqui"/></div>
+                            <div class="div1" ><input id="mensagem" class="mytext" placeholder="Escreve aqui"/></div>
                         </div>
 
                         <div class="grid-child green">
-                            <div class="div1"><button type="submit" class="message-submit">Enviar</button></div>
+                            <div class="div1"><button type="submit" class="message-submit" onclick="submitMensagem()">Enviar</button></div>
                         </div>
                         
                     </div> 

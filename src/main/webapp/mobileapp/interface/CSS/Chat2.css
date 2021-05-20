@@ -36,11 +36,12 @@
     padding: 6px 10px; 
     border-radius: 10px;
     outline: none!important;
+    float: right;
 }
 
 .mytext{
     border:0;
-    padding:8px;
+    padding:2px;
     background:whitesmoke;
 }
 .text{
