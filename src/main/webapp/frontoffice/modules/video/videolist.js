@@ -76,7 +76,7 @@ function updateVideo(){
             var newid = localStorage.getItem("id");
             $.ajax({
                 url: 'http://localhost:8080/prochild/VideoController',
-                data: {'pwhat': 'updateVideo', "videoId": newid, "nome": document.getElementById("nomevideo").value,
+                data: {'pwhat': 'updateVideo', "video_id": newid, "nome": document.getElementById("nomevideo").value,
                     "link": document.getElementById("linkvideo").value, "descricao": document.getElementById("descricaovideo").value,
                     "disponivel": 1},
                 beforeSend: function (xhr) {                

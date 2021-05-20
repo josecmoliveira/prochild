@@ -63,12 +63,12 @@ function getNoticia() {
 }
 
 
-function updateVideo(){
+function updateNoticia(){
             var newid = localStorage.getItem("id");
             $.ajax({
-                url: 'http://localhost:8080/prochild/VideoController',
-                data: {'pwhat': 'updateVideo', "noticiaId": newid, "nome": document.getElementById("nomevideo").value,
-                    "link": document.getElementById("linkvideo").value, "descricao": document.getElementById("descricaovideo").value,
+                url: 'http://localhost:8080/prochild/NoticiaController',
+                data: {'pwhat': 'updateNoticia', "noticia_id": newid, "nome": document.getElementById("nomenoticia").value,
+                    "link": document.getElementById("linknoticia").value, "descricao": document.getElementById("descricaonoticia").value,
                     "disponivel": 1},
                 beforeSend: function (xhr) {                
                     console.log("O video vai ser atualizado");
@@ -76,7 +76,7 @@ function updateVideo(){
             },
                 success: function (data) {
                     console.log("Video Atualizado");
-                    window.location.replace('videos.html');
+                    window.location.replace('noticias.html');
             }
         });
     }
