@@ -22,11 +22,13 @@ function getVideosList() {
                 for (var i=0; i<count; i++) {
                         var button = document.createElement("button");
                         var button1 = (button.innerHTML = '<a id="link1" target="_self" href="video2.html">' + json.video[i].nome + '</a>');
-                        var row = $('<iframe width="400" height="280" src="'+ json.video[i].link +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
-                       $('#grid').append(row);
+                        
+                       var row = $('<tr><td style="display:none;">' + json.video[i].videoId+ '</td><td style="float: left; clear:none; "><iframe width="400" height="280" src="'+ json.video[i].link +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td><td style="clear:none; ">' + button1 + '</td>\n\
+                       <td><p>' + json.video[i].descricao + '</p></td></tr>');
+                       $('#tabelavideos').append(row);
                        console.log(json.lenght);
                        $('a').click ( function() {
-                            var row = $(this).closest('button');
+                            var row = $(this).closest('tr');
                             row1 = row.find('td:eq(0)').text();
                             id = row1;
                             setId(id);
@@ -62,6 +64,8 @@ function getVideo() {
                     document.getElementById("nomevideo").textContent += json.video[0].nome;
                      document.getElementById("linkvideo").textContent += json.video[0].link;
                     document.getElementById("descricaovideo").textContent += json.video[0].descricao;
+                    
+                    console.log(json.video[0].descricao);
                    
             }
         });
