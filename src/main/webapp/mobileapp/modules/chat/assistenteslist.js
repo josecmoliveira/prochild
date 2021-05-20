@@ -135,10 +135,12 @@ function getMensagensList() {
 function submitMensagem(){
             $.ajax({
                 url: 'http://localhost:8080/prochild/ChatController',
-                data: {'pwhat': 'sendMessagem', "userId": localStorage.getItem("userIdE"), "mensagem": document.getElementById("mensagem").value, "conversaId": localStorage.getItem("id")},
+                data: {'pwhat': 'sendMensagem', "userId": localStorage.getItem("userIdE"), "message": document.getElementById("mensagem").value, "conversaId": localStorage.getItem("id")},
                 beforeSend: function (xhr) {                
                     console.log("Vai ser enviada uma mensagem");
                     console.log(document.getElementById("mensagem").value);
+                    console.log(localStorage.getItem("userIdE"));
+                    console.log(localStorage.getItem("id"));
             },
                 success: function (data) {
                     console.log("Mensagem adicionado");

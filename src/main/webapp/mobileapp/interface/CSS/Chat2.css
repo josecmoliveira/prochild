@@ -25,11 +25,19 @@
   
 }
 
+.botaovoltar {
+    position: relative;
+    bottom:50px;
+    right:35px;
+    font-size:40px;
+    color:#FF3D00;
+   }
+
 .message-submit{
     margin-top: 10px;
     color: #fff;
     border: none;
-    background: #248A52;
+    background: #FF3D00;
     font-size: 10px;
     text-transform: uppercase;
     line-height: 1;
@@ -93,7 +101,8 @@
 }
 .msj{
     float:left;
-    background:white;
+    background:#FF3D00;
+    color: white;
 }
 .frame{
     background:#e0e0de;
@@ -110,6 +119,7 @@
 }
 ul {
     width:100%;
+    font-size: 10px;
     list-style-type: none;
     padding:18px;
     position:absolute;
