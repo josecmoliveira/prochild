@@ -77,3 +77,19 @@ function updateDescricao(){
             }
         });
     }
+    
+    function removerDireito(){
+            var newid = localStorage.getItem("id");
+            $.ajax({
+                url: 'http://localhost:8080/prochild/DireitoController',
+                data: {'pwhat': 'removeDireito', "direito_id": newid},
+                beforeSend: function (xhr) {                
+                    console.log("O direito vai ser eliminado");
+                    
+            },
+                success: function (data) {
+                    console.log("Direito Eliminado");
+                    window.location.replace('tema1.html');
+            }
+        });
+    }

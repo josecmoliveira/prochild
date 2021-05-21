@@ -144,6 +144,7 @@ function submitMensagem(){
             },
                 success: function (data) {
                     console.log("Mensagem adicionado");
+                    document.getElementById("mensagem").value = '';
             }
         });
     }

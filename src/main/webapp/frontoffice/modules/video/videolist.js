@@ -89,3 +89,19 @@ function updateVideo(){
             }
         });
     }
+    
+    function removerVideo(){
+            var newid = localStorage.getItem("id");
+            $.ajax({
+                url: 'http://localhost:8080/prochild/VideoController',
+                data: {'pwhat': 'removeVideo', "video_id": newid},
+                beforeSend: function (xhr) {                
+                    console.log("O video vai ser eliminado");
+                    
+            },
+                success: function (data) {
+                    console.log("Video Eliminado");
+                    window.location.replace('videos.html');
+            }
+        });
+    }

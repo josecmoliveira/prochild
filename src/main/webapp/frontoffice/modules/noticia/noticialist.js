@@ -80,3 +80,19 @@ function updateNoticia(){
             }
         });
     }
+    
+    function removerNoticia(){
+            var newid = localStorage.getItem("id");
+            $.ajax({
+                url: 'http://localhost:8080/prochild/NoticiaController',
+                data: {'pwhat': 'removeNoticia', "noticia_id": newid},
+                beforeSend: function (xhr) {                
+                    console.log("A noticia vai ser eliminada");
+                    
+            },
+                success: function (data) {
+                    console.log("Noticia Eliminada");
+                    window.location.replace('noticias.html');
+            }
+        });
+    }
