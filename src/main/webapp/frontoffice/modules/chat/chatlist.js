@@ -82,7 +82,7 @@ function getMensagensList() {
                             '<div class="msj-rta macro">' +
                             '<div class="text text-l">' +
                             '<p>' + json.conversas[i].conteudo + '</p>' +
-                            '<p><small>bruh</small></p>' +
+                            '<p><small></small></p>' +
                             '</div>' +
                             '</div>' +
                             '</li>';
